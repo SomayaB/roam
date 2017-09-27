@@ -9,8 +9,8 @@ router.get('/:id', (request, response) => {
   .then(user => {
     Posts.getByUserId(user.id)
     .then(posts => {
-      user.date_joined = user.date_joined.toDateString();
-      response.render('users/show', {user, posts});
+      const humanReadableDate = user.date_joined.toDateString();
+      response.render('users/show', {user, posts, humanReadableDate});
     });
   });
 });
