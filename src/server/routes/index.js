@@ -3,8 +3,9 @@ const auth = require('./auth');
 const users = require('./users');
 const posts = require('./posts');
 const cities = require('./cities');
-const {isLoggedIn} = require('../utils');
+const { isLoggedIn, setDefaultReponseLocals } = require('../middlewares');
 
+router.use(setDefaultReponseLocals);
 
 router.get('/', (request, response) => {
   if(request.session.user) {
@@ -13,6 +14,7 @@ router.get('/', (request, response) => {
   }
   response.render('index');
 });
+
 
 router.use('/', auth);
 router.use(isLoggedIn);
