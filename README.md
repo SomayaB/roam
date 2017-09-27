@@ -2,6 +2,7 @@
 
 ## Dev Setup
 
+1. Clone the repository.
 1. Install your dependencies: `npm install`
 1. Create your database: `npm run db:create`
 1. Load your schema: `npm run load_schema`

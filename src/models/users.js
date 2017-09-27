@@ -1,5 +1,5 @@
 const db = require('./db/users');
-const { encryptPassword, comparePasswords } = require('./utils');
+const { encryptPassword, comparePasswords } = require('../utils');
 
 const findById = (id) => {
   return db.findById(id);
@@ -10,7 +10,10 @@ const findByEmail = (email) => {
 };
 
 const create = (email, password) => {
-  return db.create(email, encryptPassword(password));
+  return encryptPassword(password)
+  .then(hashedPassword => {
+    return db.create(email, hashedPassword);
+  });
 };
 
 const getPostsByUserId = function(userId) {
