@@ -5,6 +5,10 @@ router.get('/', (request, response) => {
   Cities.getAll()
   .then(cities => {
     response.render('cities/index', {cities});
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
   });
 });
 
@@ -16,7 +20,11 @@ router.get('/:id', (request, response) => {
     .then(posts => {
       response.render('cities/show', {city, posts});
       });
-    });
+    })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
 });
 
 module.exports = router;

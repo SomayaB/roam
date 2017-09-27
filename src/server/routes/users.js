@@ -12,6 +12,10 @@ router.get('/:id', (request, response) => {
       const humanReadableDate = user.date_joined.toDateString();
       response.render('users/show', {user, posts, humanReadableDate});
     });
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
   });
 });
 
@@ -24,6 +28,10 @@ router.put('/:id', (request, response) => {
   Users.updateProfile(name, currentCity, id)
   .then(() => {
     response.redirect(`/users/${id}`);
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
   });
 });
 

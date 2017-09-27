@@ -11,6 +11,10 @@ router.get('/:id', (request, response) => {
       const author = name.name;
       response.render("posts/show", {post, author});
     });
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
   });
 });
 
