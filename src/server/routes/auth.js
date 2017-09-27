@@ -44,8 +44,11 @@ router.post('/login', (request, response) => {
     .then(passwordsMatch => {
       if(passwordsMatch) {
         createSession(request, response, user);
-        request.session.save(function(err) {
+        request.session.save(error => {
           response.redirect(`/users/${user.id}`);
+          if(error) {
+            console.error(error);
+          }
         });
       } else {
         response.render('auth/login', {warning: 'Incorrect username or password'});
@@ -58,8 +61,11 @@ router.post('/login', (request, response) => {
 });
 
 router.get('/logout', (request, response) => {
-  request.session.destroy(() => {
+  request.session.destroy((error) => {
     response.redirect('/login');
+    if(error) {
+      console.error(error);
+    }
   });
 });
 
