@@ -7,14 +7,14 @@ const isLoggedIn = (request, response, next) => {
   }
 };
 
-const setDefaultReponseLocals = ((request, response, next) => {
-  response.locals.query = '';
-  response.locals.isLoggedIn = false;
-  next();
-});
+// const setDefaultReponseLocals = (request, response, next) => {
+//   response.locals.query = '';
+//   response.locals.isLoggedIn = false;
+//   next();
+// };
 
 
 module.exports = {
-  isLoggedIn,
-  setDefaultReponseLocals
+  isLoggedIn
+  // setDefaultReponseLocals
 };

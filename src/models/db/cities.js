@@ -21,15 +21,13 @@ const findById = (id) => {
     });
 };
 
-const getPostsByCityId = (id) => {
-  return db.any(`
-    SELECT * FROM posts
-    JOIN cities
-    ON posts.city_id = $1
-    ORDER BY posts.title
-    `, id)
+const findByName = (name) => {
+  return db.oneOrNone(`
+    SELECT * FROM cities
+    WHERE lower(name) = $1
+    `, name)
     .catch(error => {
-      console.error(error.message, "The argument is:::", id);
+      console.error(error.message, "The argument is:::", name);
       throw error;
     });
 };
@@ -37,5 +35,5 @@ const getPostsByCityId = (id) => {
 module.exports = {
   getAll,
   findById,
-  getPostsByCityId
+  findByName
 };

@@ -1,20 +1,18 @@
 const router = require('express').Router();
 const Posts = require('../../models/posts');
+const Users = require('../../models/users');
+const Cities = require('../../models/cities');
 
-router.get('/:id', (request, response) => {
-  const id = request.params.id;
-  Posts.getById(id)
+router.get('/cities/:cityName/:postTitle', (request, response) => {
+  const city = request.params.cityName;
+  const postTitle = request.params.postTitle;
+  //search by what?? should it even be title or id?
+  Posts.getPostByTitle(postTitle)
   .then(post => {
-    console.log(post);
-    Posts.getAuthor(post.user_id)
-    .then(name => {
-      const author = name.name;
-      response.render("posts/show", {post, author});
+    Posts.getNameFromUser(post.user_id)
+    .then(user => {
+      response.render('posts/show', {user, post});
     });
-  })
-  .catch(error => {
-    console.error(error.message);
-    throw error;
   });
 });
 

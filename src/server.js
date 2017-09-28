@@ -13,12 +13,17 @@ app.use(morgan("dev"));
 
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
-//pug needs a basedir or else it won't work
 app.locals.basedir = path.join(__dirname, '/views');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
+
+app.use((request, response, next) => {
+  response.locals.query = '';
+  response.locals.isLoggedIn = false;
+  next();
+});
 
 
 app.use(session({
