@@ -21,7 +21,7 @@ router.use('/', auth);
 router.use(isLoggedIn);
 router.use('/users', users);
 router.use('/cities', cities);
-router.use('/', posts);
+router.use('/posts', posts);
 
 
 

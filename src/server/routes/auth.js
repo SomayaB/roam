@@ -8,7 +8,9 @@ router.get('/signup', (request, response) => {
     const id = request.session.user.id;
     response.redirect(`/users/${id}`);
   }
-  response.render('auth/signup');
+  else {
+    response.render('auth/signup');
+  }  
 });
 
 router.post('/signup', (request, response) => {
