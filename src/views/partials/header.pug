@@ -1,6 +1,7 @@
-a(href="/") Roam
-a(href="/posts/new") New posts
-if isLoggedIn 
-  a(href="/logout") Logout
-else 
-  a(href="/login") Login/ Sign up
+nav.navbar
+  a(href="/") Roam
+  a(href="/posts/new") New posts
+  if isLoggedIn 
+    a(href="/logout") Logout
+  else 
+    a(href="/login") Login/ Sign up

@@ -1,0 +1,10 @@
+extends /partials/layout
+
+block content
+  
+  form.flex-full
+    div Title:
+      input.title-input(type="text", name="title", maxlength='120', placeholder="Summarize your visit or highlight an interesting detail.") 
+    div Your review:  
+      textarea.post-textarea(type="text", name="content", placeholder="Tell people about your experience.")
+  
