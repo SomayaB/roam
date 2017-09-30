@@ -24,7 +24,7 @@ block content
   div.rightColumn
     each post in posts
       p
-        a(href=`/${user.name}/${post.title}`) #{post.title}
+        a(href=`/posts/${post.id}`) #{post.title}
   
   div.edit-profile-modal
     div.edit-profile-modal-content

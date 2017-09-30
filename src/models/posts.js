@@ -12,8 +12,8 @@ const getNameFromUser = function(userId) {
   return db.getNameFromUser(userId);
 };
 
-const getPostsByCityId = (id) => {
-  return db.getPostsByCityId(id);
+const getAllPostInfoByCityId = (cityId) => {
+  return db.getAllPostInfoByCityId(cityId);
 };
 
 const getPostByTitle = (title) => {
@@ -24,6 +24,6 @@ module.exports = {
   getByUserId,
   getById,
   getNameFromUser,
-  getPostsByCityId,
+  getAllPostInfoByCityId,
   getPostByTitle
 };

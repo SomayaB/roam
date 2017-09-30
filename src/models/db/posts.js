@@ -33,9 +33,11 @@ const getNameFromUser = (userId) => {
     });
 };
 
-const getPostsByCityId = (cityId) => {
+const getAllPostInfoByCityId = (cityId) => {
   return db.any(`
-    SELECT * FROM posts
+    SELECT posts.id, posts.title, posts.content, cities.name, users.name, cities.image_url FROM posts
+    JOIN cities
+    ON posts.city_id = cities.id
     JOIN users
     ON posts.user_id = users.id
     WHERE city_id = $1
@@ -63,6 +65,6 @@ module.exports = {
   getByUserId,
   getById,
   getNameFromUser,
-  getPostsByCityId,
+  getAllPostInfoByCityId,
   getPostByTitle
 };

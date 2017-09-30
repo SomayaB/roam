@@ -3,6 +3,19 @@ const Posts = require('../../models/posts');
 const Users = require('../../models/users');
 const Cities = require('../../models/cities');
 
+router.get('/new', (request, response) => {
+  response.render('posts/new');
+});
+
+
+// router.post('posts/:id', (request, response) => {
+//   const title = request.body.title;
+//   const content = request.body.content;
+//   const author =
+//   response.render('posts/new', {title, content, author});
+// });
+
+
 router.get('/:id', (request, response) => {
   const id = request.params.id;
   Posts.getById(id)
@@ -13,14 +26,5 @@ router.get('/:id', (request, response) => {
     });
   });
 });
-
-
-router.get('/new', (request, response) => {
-  response.render('posts/new');
-});
-
-// router.post('posts/new', (request, response) => {
-//
-// });
 
 module.exports = router;

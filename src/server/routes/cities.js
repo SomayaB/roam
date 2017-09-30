@@ -13,28 +13,13 @@ router.get('/', (request, response) => {
   });
 });
 
-// router.get('/:id', (request, response) => {
-//   const id = request.params.id;
-//   Cities.findById(id)
-//   .then(city => {
-//     Posts.getPostsByCityId(city.id)
-//     .then(posts => {
-//       response.render('cities/show', {city, posts});
-//       });
-//     })
-//   .catch(error => {
-//     console.error(error.message);
-//     throw error;
-//   });
-// });
-
 router.get('/:city', (request, response) => {
   const city = request.params.city;
   Cities.findByName(city)
-  .then(cityInfo => {
-    Posts.getPostsByCityId(cityInfo.id)
+  .then(city => {
+    Posts.getAllPostInfoByCityId(city.id)
     .then(posts => {
-      response.render('cities/show', { cityInfo, posts });
+      response.render('cities/show', { city, posts });
     })
   .catch(error => {
     console.error(error.message);

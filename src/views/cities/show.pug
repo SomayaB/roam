@@ -2,13 +2,13 @@ extends /partials/layout
 
 block content
   
-  h1 #{cityInfo.name}
-  img(src=`${cityInfo.image_url}`)
+  h1 #{city.name}
+  img(src=`${city.image_url}`)
   ul
     each post in posts
       li
         h3 
-          a(href=`/cities/${cityInfo.name}/${post.title}`) #{post.title}
+          a(href=`/posts/${post.id}`) #{post.title}
         h5 by #{post.name}
         
         p #{post.content}
