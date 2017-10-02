@@ -8,12 +8,12 @@ router.get('/new', (request, response) => {
 });
 
 
-// router.post('posts/:id', (request, response) => {
-//   const title = request.body.title;
-//   const content = request.body.content;
-//   const author =
-//   response.render('posts/new', {title, content, author});
-// });
+router.post('/:id', (request, response) => {
+  const title = request.body.title;
+  const content = request.body.content;
+  const author = request.session.name;
+  response.render('posts/show', {title, content, author});
+});
 
 
 router.get('/:id', (request, response) => {
