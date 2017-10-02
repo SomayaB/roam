@@ -1,22 +1,22 @@
 const router = require('express').Router();
-const { encryptPassword, comparePasswords, createSession } = require('../utils');
+const { createSession } = require('../utils');
+const { comparePasswords } = require('../../utils')
 const Users = require('../../models/users');
-const utils = require('../utils');
 
 router.get('/signup', (request, response) => {
   if(request.session.user) {
     const id = request.session.user.id;
     response.redirect(`/users/${id}`);
   }
-  response.render('auth/signup');
+  else {
+    response.render('auth/signup');
+  }  
 });
 
 router.post('/signup', (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
-  encryptPassword(password)
-  .then(hashedPassword => {
-    Users.create(email, hashedPassword)
+    Users.create(email, password)
     .then(newUser => {
      createSession(request, response, newUser);
      const id = newUser.id;
@@ -27,7 +27,6 @@ router.post('/signup', (request, response) => {
    .catch(error => {
      response.render('auth/signup', {warning: 'That username already exists. Please choose another.'});
    });
- });
 });
 
 router.get('/login', (request, response) => {
@@ -48,8 +47,11 @@ router.post('/login', (request, response) => {
     .then(passwordsMatch => {
       if(passwordsMatch) {
         createSession(request, response, user);
-        request.session.save(function(err) {
+        request.session.save(error => {
           response.redirect(`/users/${user.id}`);
+          if(error) {
+            console.error(error);
+          }
         });
       } else {
         response.render('auth/login', {warning: 'Incorrect username or password'});
@@ -62,8 +64,11 @@ router.post('/login', (request, response) => {
 });
 
 router.get('/logout', (request, response) => {
-  request.session.destroy(() => {
+  request.session.destroy((error) => {
     response.redirect('/login');
+    if(error) {
+      console.error(error);
+    }
   });
 });
 

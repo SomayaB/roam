@@ -8,12 +8,12 @@ const findById = (id) => {
   return db.findById(id);
 };
 
-const getPostsByCityId = (id) => {
-  return db.getPostsByCityId(id);
-};
+const findByName = (name => {
+  return db.findByName(name);
+});
 
 module.exports = {
   getAll,
   findById,
-  getPostsByCityId
+  findByName
 };

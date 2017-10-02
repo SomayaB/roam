@@ -12,7 +12,7 @@ const getByUserId = function(userId) {
 };
 
 const getById = function(id) {
-  return db.one(`
+  return db.oneOrNone(`
     SELECT * FROM posts
     WHERE id = $1
     `, id)
@@ -22,11 +22,10 @@ const getById = function(id) {
   });
 };
 
-const getNameFromUser = function(userId) {
-  return db.one(`
+const getNameFromUser = (userId) => {
+  return db.oneOrNone(`
     SELECT users.name FROM users
-    JOIN posts
-    ON users.id = $1
+    WHERE id = $1
     `, userId)
     .catch(error => {
       console.error(error.message, "The argument is:::", userId);
@@ -34,8 +33,38 @@ const getNameFromUser = function(userId) {
     });
 };
 
+const getAllPostInfoByCityId = (cityId) => {
+  return db.any(`
+    SELECT posts.id, posts.title, posts.content, cities.name, users.name, cities.image_url FROM posts
+    JOIN cities
+    ON posts.city_id = cities.id
+    JOIN users
+    ON posts.user_id = users.id
+    WHERE city_id = $1
+    ORDER BY posts.id DESC
+    `, cityId)
+    .catch(error => {
+      console.error(error.message, "The argument is:::", cityId);
+      throw error;
+    });
+};
+
+const getPostByTitle = (title) => {
+  // const titleWithoutSpaces = `%${title.toLowerCase().replace(/\s+/,'%')}%`;
+  return db.oneOrNone(`
+    SELECT * from posts
+    WHERE title = $1
+    `, title)
+    .catch(error => {
+      console.error(error.message, "The argument is:::", title);
+      throw error;
+    });
+};
+
 module.exports = {
   getByUserId,
   getById,
-  getNameFromUser
+  getNameFromUser,
+  getAllPostInfoByCityId,
+  getPostByTitle
 };

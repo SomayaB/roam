@@ -8,12 +8,22 @@ const getById = function(Id) {
   return db.getById(Id);
 };
 
-const getAuthor = function(userId) {
+const getNameFromUser = function(userId) {
   return db.getNameFromUser(userId);
+};
+
+const getAllPostInfoByCityId = (cityId) => {
+  return db.getAllPostInfoByCityId(cityId);
+};
+
+const getPostByTitle = (title) => {
+  return db.getPostByTitle(title);
 };
 
 module.exports = {
   getByUserId,
   getById,
-  getAuthor
+  getNameFromUser,
+  getAllPostInfoByCityId,
+  getPostByTitle
 };

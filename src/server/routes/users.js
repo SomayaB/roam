@@ -9,21 +9,27 @@ router.get('/:id', (request, response) => {
   .then(user => {
     Posts.getByUserId(user.id)
     .then(posts => {
-      user.date_joined = user.date_joined.toDateString();
-      response.render('users/show', {user, posts});
+      const humanReadableDate = user.date_joined.toDateString();
+      response.render('users/show', {user, posts, humanReadableDate});
     });
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
   });
 });
 
 router.put('/:id', (request, response) => {
   const id = request.params.id;
-  console.log(id, "is the id");
-  console.log("The body.name is:::", request.body.name);
   const currentCity = request.body.currentCity;
   const name = request.body.name;
   Users.updateProfile(name, currentCity, id)
   .then(() => {
     response.redirect(`/users/${id}`);
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
   });
 });
 

@@ -1,8 +1,8 @@
 extends /partials/layout
 
 block content
-  
-  h1 #{post.title}
-  h3 by #{author}
-  
-  p #{post.content}
+    div.post
+      h1 #{post.title}
+      h3 by #{user.name}
+      
+      p #{post.content}
