@@ -20,10 +20,25 @@ const getPostByTitle = (title) => {
   return db.getPostByTitle(title);
 };
 
+const create = (postInfo) => {
+  return db.create(postInfo);
+};
+
+const update = (id, title, content) => {
+  return db.update(id, title, content);
+};
+
+const deleteById = (id) => {
+  return db.deleteById(id);
+};
+
 module.exports = {
   getByUserId,
   getById,
   getNameFromUser,
   getAllPostInfoByCityId,
-  getPostByTitle
+  getPostByTitle,
+  create,
+  update,
+  deleteById
 };

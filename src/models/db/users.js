@@ -52,7 +52,11 @@ const update = (name, currentCity, id) => {
     UPDATE users
     SET name=$1, current_city=$2
     WHERE id=$3
-    `, [name, currentCity, id]);
+    `, [name, currentCity, id])
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });  
 };
 
 

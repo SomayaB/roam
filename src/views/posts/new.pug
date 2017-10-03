@@ -1,8 +1,9 @@
 extends /partials/layout
 
 block content
-  
-  form.flex-full(action=`/posts/${post.id}`, method="post")
+  form.flex-full(action=`/posts/`, method="post")
+    div City:
+      input.city-input(type="text", name="city")
     div Title:
       input.title-input(type="text", name="title", maxlength='120', placeholder="Summarize your visit or highlight an interesting detail.") 
     div Your review:  

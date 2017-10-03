@@ -1,6 +1,17 @@
 const db = require("./db");
 
-const getByUserId = function(userId) {
+const create = (postInfo) => {
+  return db.any(`INSERT INTO posts (title, content, user_id, city_id)
+    VALUES($1, $2, $3, $4)
+    RETURNING *
+    `, [postInfo.title, postInfo.content, postInfo.userId, postInfo.cityId])
+  .catch(error => {
+    console.error(error.message, "The argument is:::", postInfo);
+    throw error;
+  });
+};
+
+const getByUserId = (userId) => {
   return db.any(`
     SELECT * FROM posts
     WHERE user_id = $1
@@ -11,7 +22,7 @@ const getByUserId = function(userId) {
   });
 };
 
-const getById = function(id) {
+const getById = (id) => {
   return db.oneOrNone(`
     SELECT * FROM posts
     WHERE id = $1
@@ -61,10 +72,36 @@ const getPostByTitle = (title) => {
     });
 };
 
+const update = (id, title, content) => {
+  return db.query(`
+    UPDATE posts
+    SET title=$2, content=$3
+    WHERE id=$1
+    `, [id, title, content])
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
+const deleteById = (id) => {
+  return db.query(`
+    DELETE FROM posts
+    WHERE id=$1
+    `, id)
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
 module.exports = {
   getByUserId,
   getById,
   getNameFromUser,
   getAllPostInfoByCityId,
-  getPostByTitle
+  getPostByTitle,
+  create,
+  update,
+  deleteById
 };

@@ -6,3 +6,26 @@ block content
       h3 by #{user.name}
       
       p #{post.content}
+      
+      
+      i.fa.fa-pencil-square-o.fa-2x(aria-hidden='true').edit-profile-button
+      div.edit-profile-modal
+        div.edit-profile-modal-content
+          span.close-modal &times;
+          form(action=`/posts/${post.id}?_method=PUT`, method="POST")
+            div Title:
+              if post.title === null        
+                input(type="text" name="title")
+              else
+                input(type="text" name="title" value=`${post.title}`)    
+            div You review:
+              if post.content === null
+                textarea(type="text" name="content")
+              else 
+                textarea(type="text" name="content") #{post.content}  
+            input(type="submit", value="Submit")
+              
+      div
+        form(action=`/posts/${post.id}?_method=DELETE`, method="POST", onsubmit=`return confirm('Are you sure you want to delete "${post.title}"?')`)   
+          button.delete-button
+            i.fa.fa-trash.fa-2x(aria-hidden='true')
