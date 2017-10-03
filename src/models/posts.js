@@ -20,10 +20,15 @@ const getPostByTitle = (title) => {
   return db.getPostByTitle(title);
 };
 
+const create = (postInfo) => {
+  return db.create(postInfo);
+};
+
 module.exports = {
   getByUserId,
   getById,
   getNameFromUser,
   getAllPostInfoByCityId,
-  getPostByTitle
+  getPostByTitle,
+  create
 };

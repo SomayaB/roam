@@ -8,11 +8,28 @@ router.get('/new', (request, response) => {
 });
 
 
-router.post('/:id', (request, response) => {
+router.post('/', (request, response) => {
   const title = request.body.title;
   const content = request.body.content;
-  const author = request.session.name;
-  response.render('posts/show', {title, content, author});
+  const userId = request.session.user.id;
+  const city = (request.body.city).toLowerCase();
+  Cities.findByName(city)
+  .then(city => {
+    const postInfo = {
+      title,
+      content,
+      userId,
+      cityId: city.id
+    };
+    Posts.create(postInfo)
+    .then(post => {
+      response.redirect(`/posts/${post[0].id}`);
+    })
+    .catch(error => {
+      console.error(error.message);
+      throw error;
+    });
+  });
 });
 
 
@@ -23,6 +40,10 @@ router.get('/:id', (request, response) => {
     Users.findById(post.user_id)
     .then(user => {
       response.render('posts/show', {user, post});
+    })
+    .catch(error => {
+      console.error(error.message);
+      throw error;
     });
   });
 });
