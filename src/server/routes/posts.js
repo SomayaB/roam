@@ -62,5 +62,17 @@ router.put('/:id', (request, response) => {
   });
 });
 
+router.delete('/:id', (request, response) => {
+  const id = request.params.id;
+  Posts.deleteById(id)
+  .then(() => {
+    const userId = request.session.user.id;
+    response.redirect(`/users/${userId}`);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+});
+
 
 module.exports = router;

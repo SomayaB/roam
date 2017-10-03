@@ -84,6 +84,17 @@ const update = (id, title, content) => {
   });
 };
 
+const deleteById = (id) => {
+  return db.query(`
+    DELETE FROM posts
+    WHERE id=$1
+    `, id)
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
 module.exports = {
   getByUserId,
   getById,
@@ -91,5 +102,6 @@ module.exports = {
   getAllPostInfoByCityId,
   getPostByTitle,
   create,
-  update
+  update,
+  deleteById
 };

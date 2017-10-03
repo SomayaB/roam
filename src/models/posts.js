@@ -28,6 +28,10 @@ const update = (id, title, content) => {
   return db.update(id, title, content);
 };
 
+const deleteById = (id) => {
+  return db.deleteById(id);
+};
+
 module.exports = {
   getByUserId,
   getById,
@@ -35,5 +39,6 @@ module.exports = {
   getAllPostInfoByCityId,
   getPostByTitle,
   create,
-  update
+  update,
+  deleteById
 };
