@@ -48,4 +48,19 @@ router.get('/:id', (request, response) => {
   });
 });
 
+router.put('/:id', (request, response) => {
+  const id = request.params.id;
+  const title = request.body.title;
+  const content = request.body.content;
+  Posts.update(id, title, content)
+  .then(() => {
+    response.redirect(`/posts/${id}`);
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+});
+
+
 module.exports = router;

@@ -24,11 +24,16 @@ const create = (postInfo) => {
   return db.create(postInfo);
 };
 
+const update = (id, title, content) => {
+  return db.update(id, title, content);
+};
+
 module.exports = {
   getByUserId,
   getById,
   getNameFromUser,
   getAllPostInfoByCityId,
   getPostByTitle,
-  create
+  create,
+  update
 };

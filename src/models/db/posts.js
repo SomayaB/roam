@@ -72,11 +72,24 @@ const getPostByTitle = (title) => {
     });
 };
 
+const update = (id, title, content) => {
+  return db.query(`
+    UPDATE posts
+    SET title=$2, content=$3
+    WHERE id=$1
+    `, [id, title, content])
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
 module.exports = {
   getByUserId,
   getById,
   getNameFromUser,
   getAllPostInfoByCityId,
   getPostByTitle,
-  create
+  create,
+  update
 };
