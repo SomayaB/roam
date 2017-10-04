@@ -5,7 +5,7 @@ const posts = require('./posts');
 const cities = require('./cities');
 const { isLoggedIn, setDefaultReponseLocals } = require('../middlewares');
 
-// router.use(setDefaultReponseLocals);
+router.use(setDefaultReponseLocals);
 
 router.get('/', (request, response) => {
   if(request.session.user) {

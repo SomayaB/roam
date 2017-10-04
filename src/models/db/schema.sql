@@ -18,7 +18,7 @@ CREATE TABLE cities(
 DROP TABLE IF EXISTS posts;
 CREATE TABLE posts(
   id SERIAL PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
+  title VARCHAR(200) NOT NULL,
   content TEXT NOT NULL,
   user_id INTEGER REFERENCES users (id),
   city_id INTEGER REFERENCES cities (id)

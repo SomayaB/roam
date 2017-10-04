@@ -24,11 +24,11 @@ router.post('/', (request, response) => {
     Posts.create(postInfo)
     .then(post => {
       response.redirect(`/posts/${post[0].id}`);
-    })
-    .catch(error => {
-      console.error(error.message);
-      throw error;
     });
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
   });
 });
 
