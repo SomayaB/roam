@@ -10,7 +10,7 @@ router.get('/signup', (request, response) => {
   }
   else {
     response.render('auth/signup');
-  }  
+  }
 });
 
 router.post('/signup', (request, response) => {
