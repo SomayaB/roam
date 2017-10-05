@@ -2,16 +2,15 @@
   "name": "roam",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start:dev": "NODE_ENV=development nodemon src/server.js",
     "start": "node src/server.js",
     "db:create": "createdb roam_development",
     "db:session:setup": "psql roam_development < node_modules/connect-pg-simple/table.sql",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:reset": "dropdb roam_development && createdb roam_development && npm run db:load_schema && npm run db:session:setup",
+    "db:reset": "dropdb roam_development && createdb roam_development && npm run db:load_schema && npm run db:load_seed && npm run db:session:setup",
     "db:load_schema": "psql -d roam_development < src/models/db/schema.sql",
-    "db:load_contacts": "psql -d roam_development < test/seed/contacts.sql"
+    "db:load_seed": "psql -d roam_development < src/models/db/seed/seed.sql"
   },
   "repository": {
     "type": "git",

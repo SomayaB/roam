@@ -19,11 +19,11 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 
-app.use((request, response, next) => {
-  response.locals.query = '';
-  response.locals.isLoggedIn = false;
-  next();
-});
+// app.use((request, response, next) => {
+//   response.locals.query = '';
+//   response.locals.isLoggedIn = false;
+//   next();
+// });
 
 
 app.use(session({
