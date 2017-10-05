@@ -49,9 +49,15 @@ router.get('/:id', (request, response) => {
 });
 
 router.put('/:id', isAuthorized, (request, response) => {
-    const id = request.params.id;
-    const title = request.body.title;
-    const content = request.body.content;
+  const id = request.params.id;
+  const title = request.body.title;
+  const content = request.body.content;
+  Posts.getById(id)
+  .then(post => {
+    if (request.session.user.id !== post.user_id) {
+      response.status(403);
+      response.render('not-authorized', {warning: 'You can only edit your own posts.'});
+    } else {
     Posts.update(id, title, content)
     .then(() => {
       response.redirect(`/posts/${id}`);
@@ -60,18 +66,36 @@ router.put('/:id', isAuthorized, (request, response) => {
       console.error(error.message);
       throw error;
     });
+  }
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
 });
 
 router.delete('/:id', isAuthorized, (request, response) => {
-    const id = request.params.id;
-    Posts.deleteById(id)
-    .then(() => {
-      const userId = request.session.user.id;
-      response.redirect(`/users/${userId}`);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  const id = request.params.id;
+  Posts.getById(id)
+  .then(post => {
+    if (request.session.user.id !== post.user_id) {
+      response.status(403);
+      response.render('not-authorized', {warning: 'You can only delete your own posts.'});
+    } else {
+      Posts.deleteById(id)
+      .then(() => {
+        const userId = request.session.user.id;
+        response.redirect(`/users/${userId}`);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
 });
 
 
