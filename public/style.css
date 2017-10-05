@@ -62,8 +62,8 @@ input {
   width: 500px;
 }
 
-.post-textarea {
-  min-height: 44px;
+.post-textarea, .comment-textarea{
+min-height: 44px;
 box-shadow: inset 0 1px 2px 0 rgba(50,50,50,0.3);
 border: 1px solid #dbdad5;
 font-weight: normal;
