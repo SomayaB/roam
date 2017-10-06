@@ -18,8 +18,14 @@ block content
       p #{user.current_city}
     else
       p Current City:
-      
-    button.edit-profile-button(type="button") Edit Profile
+    
+    if  numberOfComments == 1
+      p #{numberOfCommentsLeft} comment
+    else
+      p #{numberOfCommentsLeft} comments 
+    
+    div  
+      button.edit-profile-button(type="button") Edit Profile
       
   div.rightColumn
     each post in posts

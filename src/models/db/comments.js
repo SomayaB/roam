@@ -25,8 +25,19 @@ const db = require("./db");
     });
   };
 
+  const numberOfCommentsLeft = (userId) => {
+    return db.one(`
+      SELECT COUNT(user_id) FROM comments
+        WHERE user_id = $1
+      `, userId)
+    .catch(error => {
+      console.error(error.message, "The argument is:::", userId);
+      throw error;
+    });
+  };
 
 module.exports = {
   add,
-  getAllCommentsInfoByPostId
+  getAllCommentsInfoByPostId,
+  numberOfCommentsLeft
 };

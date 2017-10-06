@@ -63,18 +63,18 @@ input {
 }
 
 .post-textarea, .comment-input{
-min-height: 44px;
-box-shadow: inset 0 1px 2px 0 rgba(50,50,50,0.3);
-border: 1px solid #dbdad5;
-font-weight: normal;
-font-size: 1.1670em;
-font-family: inherit;
-width: 50%;
-box-sizing: border-box;
-padding: 12px 5px 5px 14px;
-height: 24px;
-margin: 0;
-background-color: #fff;
+  min-height: 44px;
+  box-shadow: inset 0 1px 2px 0 rgba(50,50,50,0.3);
+  border: 1px solid #dbdad5;
+  font-weight: normal;
+  font-size: 1.1670em;
+  font-family: inherit;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 12px 5px 5px 14px;
+  height: 24px;
+  margin: 0;
+  background-color: #fff;
 }
 
 .delete-button {
@@ -83,27 +83,25 @@ background-color: #fff;
 }
 
 button.comments-button {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 10px;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
 }
 
 .comments-button:hover {
-    background-color: #ccc;
+  background-color: #ccc;
 }
 
 .comments {
-    padding: 0 18px;
-    background-color: white;
-    display: none;
+  background-color: white;
+  display: none;
 }
 
 .open-panel {
   display: block;
-  background: 'pink';
 }
