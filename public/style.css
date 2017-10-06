@@ -1,3 +1,4 @@
+
 img {
   max-height: 250px;
 }
@@ -103,5 +104,13 @@ button.comments-button {
 }
 
 .open-panel {
+  display: block;
+}
+
+.edit-comment {
+  display: none;
+}
+
+.show-edit-comments {
   display: block;
 }

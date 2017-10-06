@@ -12,6 +12,16 @@ const db = require("./db");
       });
   };
 
+  const getById = (id) => {
+    return db.any(`
+      SELECT * FROM comments
+      WHERE id = $1`, id)
+    .catch(error => {
+      console.error(error.message, "The argument is:::", id);
+      throw error;
+    });
+  };
+
   const getAllCommentsInfoByPostId = (postId) => {
     return db.any(`
       SELECT comments.comment, users.name AS comment_author FROM comments
@@ -39,5 +49,6 @@ const db = require("./db");
 module.exports = {
   add,
   getAllCommentsInfoByPostId,
-  numberOfCommentsLeft
+  numberOfCommentsLeft,
+  getById
 };

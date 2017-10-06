@@ -22,8 +22,17 @@ editProfileModal.addEventListener('click', () => {
 //drop down comments
 const commentsButton = document.querySelector(".comments-button");
 const comments = document.querySelector(".comments");
-console.log('comments:::', comments);
 
 commentsButton.addEventListener('click', () => {
   comments.classList.toggle('open-panel');
 });
+
+//drop down edit comments NOT WORKING
+// const editCommentButtons = document.querySelector(".edit-comment-button");
+// const editComments = document.querySelector(".edit-comments");
+// console.log(editCommentButtons);
+// editCommentButtons.forEach(button => {
+//   button.addEventListener('click', () => {
+//     editComments.classList.toggle('show-edit-comments');
+//   });
+// });
