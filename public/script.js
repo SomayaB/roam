@@ -18,3 +18,12 @@ editProfileModal.addEventListener('click', () => {
     editProfileModal.style.display = "none";
   }
 });
+
+//drop down comments
+const commentsButton = document.querySelector(".comments-button");
+const comments = document.querySelector(".comments");
+console.log('comments:::', comments);
+
+commentsButton.addEventListener('click', () => {
+  comments.classList.toggle('open-panel');
+});
