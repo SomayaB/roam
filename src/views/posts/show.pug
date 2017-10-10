@@ -47,7 +47,6 @@ block content
                   strong #{comment.comment_author}: 
                   | #{comment.comment}
                 
-                div.edit-comment-input
-                  form(action=`/posts/${post.id}/comments/${comment.id}?_method=PUT`, method="POST")
-                    input(type="text" name="comment" value=`${comment.comment}`)
-                    input(type="submit", value="Submit")
+                form(action=`/posts/${post.id}/comments/${comment.id}?_method=PUT`, method="POST").edit-comment-input
+                  input(type="text" name="comment" value=`${comment.comment}`)
+                  input(type="submit", value="Submit")

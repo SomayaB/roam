@@ -92,6 +92,7 @@ button.comments-button {
   border: none;
   outline: none;
   transition: 0.4s;
+  margin-bottom: 10;
 }
 
 .comments-button:hover {
@@ -112,9 +113,13 @@ button.comments-button {
 }
 
 .show-edit-comment {
-  display: block;
+  display: inline;
 }
 
 .hide-comment-paragraph {
   display: none;
+}
+
+.comment-paragraph {
+  display: inline;
 }
