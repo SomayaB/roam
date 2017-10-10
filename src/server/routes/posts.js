@@ -93,24 +93,6 @@ router.put('/:id', isAuthorized, (request, response) => {
   });
 });
 
-//Function might be ok but view not done
-// router.put('/:postId/comments/:commentId', (request, response) => {
-//   const id = request.params.commentId;
-//   const comment = request.body.comment;
-//   Comments.getById(id)
-//   .then(comment => {
-//     if(request.session.user.id !== comment.user_id) {
-//       response.status(403);
-//       response.render('not-authorized', {warning: 'You can only edit your own comments.'});
-//     } else {
-//     Comments.update(id, comment)
-//     .then(() => {
-//       response.redirect(`/posts/${id}`);
-//     });
-//     }
-//   });
-// });
-
 
 router.delete('/:id', isAuthorized, (request, response) => {
   const id = request.params.id;

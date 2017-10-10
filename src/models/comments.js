@@ -16,9 +16,15 @@ const getById = (id) => {
   return db.getById(id);
 };
 
+const update = (id, comment) => {
+  return db.update(id, comment);
+};
+
+
 module.exports = {
   add,
   getAllCommentsInfoByPostId,
   numberOfCommentsLeft,
-  getById
+  getById,
+  update
 };

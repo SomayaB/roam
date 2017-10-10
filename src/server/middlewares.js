@@ -1,10 +1,8 @@
 const isLoggedIn = (request, response, next) => {
   if(request.session.user) {
     response.locals.isLoggedIn = true;
-    next();
-  } else {
-    next();
   }
+  next();
 };
 
 const isAuthorized = (request, response, next) => {

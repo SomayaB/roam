@@ -30,12 +30,12 @@ block content
       
       p #{post.content}
       
+    div.commentsDiv
       if isLoggedIn 
         form(action=`/posts/${post.id}/comments`, method="POST")
           input.comment-input(type="text" name="comment" placeholder="Write a comment...")
           input(type='submit', style='position: absolute; left: -9999px; width: 1px; height: 1px;', tabindex='-1')
 
-      div.commentsDiv
         button.comments-button #{comments.length} Comments
         div.comments
           each comment in comments
@@ -43,10 +43,9 @@ block content
               strong #{comment.comment_author}: 
               | #{comment.comment}
             
-            -//need to refactor for generic class names  
-            //- div.edit-comments   
+            div.edit-comments   
               i.edit-comment-button.fa.fa-pencil-square-o(aria-hidden='true')
-              form(action=`/posts/${post.id}/comment/${comment.id}?_method=PUT`, method="POST")
+              form(action=`/posts/${post.id}/comments/${comment.id}?_method=PUT`, method="POST")
                 div Comment:
                   input(type="text" name="comment" value=`${comment.comment}`)
                 input(type="submit", value="Submit")

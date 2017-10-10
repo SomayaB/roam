@@ -13,7 +13,7 @@ const db = require("./db");
   };
 
   const getById = (id) => {
-    return db.any(`
+    return db.oneOrNone(`
       SELECT * FROM comments
       WHERE id = $1`, id)
     .catch(error => {
@@ -24,7 +24,7 @@ const db = require("./db");
 
   const getAllCommentsInfoByPostId = (postId) => {
     return db.any(`
-      SELECT comments.comment, users.name AS comment_author FROM comments
+      SELECT comments.id, comments.comment, users.name AS comment_author FROM comments
         JOIN users
         ON comments.user_id = users.id
         WHERE post_id = $1
@@ -46,9 +46,21 @@ const db = require("./db");
     });
   };
 
+  const update = (id, newComment) => {
+    return db.query(`
+      UPDATE
+        comments
+      SET comment=$2
+      WHERE id=$1
+      `, [id, newComment])
+    .catch(error => console.log(error));
+  };
+
+
 module.exports = {
   add,
   getAllCommentsInfoByPostId,
   numberOfCommentsLeft,
-  getById
+  getById,
+  update
 };
