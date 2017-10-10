@@ -18,3 +18,21 @@ editProfileModal.addEventListener('click', () => {
     editProfileModal.style.display = "none";
   }
 });
+
+//drop down comments
+const commentsButton = document.querySelector(".comments-button");
+const comments = document.querySelector(".comments");
+
+commentsButton.addEventListener('click', () => {
+  comments.classList.toggle('open-panel');
+});
+
+//edit comments
+const editCommentButtons = document.querySelectorAll(".edit-comment-button");
+
+editCommentButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    button.parentNode.parentNode.querySelector('.edit-comment-input').classList.toggle('show-edit-comment');
+    button.parentNode.parentNode.querySelector('.comment-paragraph').querySelector('.comment-paragraph-content').classList.toggle('hide-comment-paragraph');
+  });
+});

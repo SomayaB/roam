@@ -23,3 +23,11 @@ CREATE TABLE posts(
   user_id INTEGER REFERENCES users (id),
   city_id INTEGER REFERENCES cities (id)
 );
+
+DROP TABLE IF EXISTS comments;
+CREATE TABLE comments(
+  id SERIAL PRIMARY KEY,
+  comment TEXT NOT NULL,
+  post_id INTEGER REFERENCES posts (id),
+  user_id INTEGER REFERENCES users (id)
+);

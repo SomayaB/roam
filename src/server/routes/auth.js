@@ -18,7 +18,7 @@ router.post('/signup', (request, response) => {
   const password = request.body.password;
     Users.create(email, password)
     .then(newUser => {
-     createSession(request, response, newUser);
+     createSession(request, response, newUser); //addUserToSession()
      const id = newUser.id;
      request.session.save(function(err) {
        response.redirect(`/users/${newUser.id}`);

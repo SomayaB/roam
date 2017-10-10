@@ -2,7 +2,7 @@ extends /partials/layout
 
 block content
   
-  div.leftColumn
+  div.left-column
     img(src="/blank-profile-picture.png")
     if user.name
       p #{user.name}
@@ -15,16 +15,27 @@ block content
       p Date Joined:
       
     if user.current_city
-      p #{user.current_city}
+      i.fa.fa-home(aria-hidden='true')  
+      | 
+      |
+      span Lives in #{user.current_city}
     else
       p Current City:
+    
+    br
+    br    
+    div  
+      button.edit-profile-button(type="button") Edit Profile
       
-    button.edit-profile-button(type="button") Edit Profile
-      
-  div.rightColumn
+  div.right-column
     each post in posts
       p
         a(href=`/posts/${post.id}`) #{post.title}
+        
+  if  numberOfComments == 1
+    p #{numberOfCommentsLeft} comment
+  else
+    p #{numberOfCommentsLeft} comments       
   
   div.edit-profile-modal
     div.edit-profile-modal-content

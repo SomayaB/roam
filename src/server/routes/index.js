@@ -3,6 +3,7 @@ const auth = require('./auth');
 const users = require('./users');
 const posts = require('./posts');
 const cities = require('./cities');
+const comments = require('./comments');
 const { isLoggedIn, isAuthorized, setDefaultReponseLocals } = require('../middlewares');
 
 router.use(setDefaultReponseLocals);
@@ -22,6 +23,7 @@ router.use(isLoggedIn);
 router.use('/users', users);
 router.use('/cities', cities);
 router.use('/posts', posts);
+router.use('/posts', comments);
 
 
 

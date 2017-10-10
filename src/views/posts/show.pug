@@ -2,30 +2,56 @@ extends /partials/layout
 
 block content
     div.post
+      div.icons
+        i.fa.fa-pencil-square-o.fa-2x(aria-hidden='true').edit-profile-button
+        div.edit-profile-modal
+          div.edit-profile-modal-content
+            span.close-modal &times;
+            form(action=`/posts/${post.id}?_method=PUT`, method="POST")
+              div Title:
+                if post.title === null        
+                  input(type="text" name="title")
+                else
+                  input(type="text" name="title" value=`${post.title}`)    
+              div You review:
+                if post.content === null
+                  textarea(type="text" name="content")
+                else 
+                  textarea(type="text" name="content") #{post.content}  
+              input(type="submit", value="Submit")
+                
+        div
+          form(action=`/posts/${post.id}?_method=DELETE`, method="POST", onsubmit=`return confirm('Are you sure you want to delete "${post.title}"?')`)   
+            button.delete-button
+              i.fa.fa-trash.fa-3x(aria-hidden='true')
+
       h1 #{post.title}
       h3 by #{user.name}
       
       p #{post.content}
       
-      
-      i.fa.fa-pencil-square-o.fa-2x(aria-hidden='true').edit-profile-button
-      div.edit-profile-modal
-        div.edit-profile-modal-content
-          span.close-modal &times;
-          form(action=`/posts/${post.id}?_method=PUT`, method="POST")
-            div Title:
-              if post.title === null        
-                input(type="text" name="title")
-              else
-                input(type="text" name="title" value=`${post.title}`)    
-            div You review:
-              if post.content === null
-                textarea(type="text" name="content")
-              else 
-                textarea(type="text" name="content") #{post.content}  
-            input(type="submit", value="Submit")
-              
-      div
-        form(action=`/posts/${post.id}?_method=DELETE`, method="POST", onsubmit=`return confirm('Are you sure you want to delete "${post.title}"?')`)   
-          button.delete-button
-            i.fa.fa-trash.fa-2x(aria-hidden='true')
+    div.commentsDiv
+      if isLoggedIn 
+        form(action=`/posts/${post.id}/comments`, method="POST")
+          input.comment-input(type="text" name="comment" placeholder="Write a comment...")
+          input(type='submit', style='position: absolute; left: -9999px; width: 1px; height: 1px;', tabindex='-1')
+
+        button.comments-button #{comments.length} Comments
+        div.comments
+          each comment in comments
+            div.comment
+              div.comment-paragraph
+                form(action=`/posts/${post.id}/comments/${comment.id}?_method=DELETE`, method="POST").delete-comment
+                  button.delete-comment-button
+                    i.fa.fa-trash(aria-hidden='true') 
+                  | 
+                i.edit-comment-button.fa.fa-pencil-square-o(aria-hidden='true')  
+                |  
+                span.comment-paragraph-content
+                  strong #{comment.comment_author}: 
+                  | #{comment.comment}
+                
+                form(action=`/posts/${post.id}/comments/${comment.id}?_method=PUT`, method="POST").edit-comment-input
+                  input(type="text" name="comment" value=`${comment.comment}`)
+                  input(type="submit", value="Submit")
+                

@@ -1,3 +1,4 @@
+
 img {
   max-height: 250px;
 }
@@ -62,22 +63,72 @@ input {
   width: 500px;
 }
 
-.post-textarea {
+.post-textarea, .comment-input{
   min-height: 44px;
-box-shadow: inset 0 1px 2px 0 rgba(50,50,50,0.3);
-border: 1px solid #dbdad5;
-font-weight: normal;
-font-size: 1.1670em;
-font-family: inherit;
-width: 50%;
-box-sizing: border-box;
-padding: 12px 5px 5px 14px;
-height: 24px;
-margin: 0;
-background-color: #fff;
+  box-shadow: inset 0 1px 2px 0 rgba(50,50,50,0.3);
+  border: 1px solid #dbdad5;
+  font-weight: normal;
+  font-size: 1.1670em;
+  font-family: inherit;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 12px 5px 5px 14px;
+  height: 24px;
+  margin: 0;
+  background-color: #fff;
 }
 
-.delete-button {
+.delete-button, .delete-comment-button {
   border: none;
   background: none;
+  padding: 0;
+}
+
+button.comments-button {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 10px;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  margin-bottom: 10;
+}
+
+.comments-button:hover {
+  background-color: #ccc;
+}
+
+.comments {
+  background-color: white;
+  display: none;
+}
+
+.open-panel {
+  display: block;
+}
+
+.edit-comment-input {
+  display: none;
+}
+
+.show-edit-comment {
+  display: inline;
+}
+
+.hide-comment-paragraph {
+  display: none;
+}
+
+.comment-paragraph {
+  display: inline;
+}
+
+.delete-comment {
+  display: inline;
+}
+
+.fa {
+  color: #606060;
 }

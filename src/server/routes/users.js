@@ -1,16 +1,21 @@
 const router = require('express').Router();
 const Users = require('../../models/users');
 const Posts = require('../../models/posts');
-
+const Comments = require('../../models/comments');
 
 router.get('/:id', (request, response) => {
   const id = request.params.id;
   Users.findById(id)
   .then(user => {
-    Posts.getByUserId(user.id)
-    .then(posts => {
-      const humanReadableDate = user.date_joined.toDateString();
-      response.render('users/show', {user, posts, humanReadableDate});
+    Comments.numberOfCommentsLeft(user.id)
+    .then(result => {
+      const numberOfCommentsLeft = result.count;
+      console.log('numberOfCommentsLeft:::', numberOfCommentsLeft);
+      Posts.getByUserId(user.id)
+      .then(posts => {
+        const humanReadableDate = user.date_joined.toDateString();
+        response.render('users/show', {user, posts, numberOfCommentsLeft, humanReadableDate});
+      });
     });
   })
   .catch(error => {
