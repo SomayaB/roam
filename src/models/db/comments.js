@@ -28,6 +28,7 @@ const db = require("./db");
         JOIN users
         ON comments.user_id = users.id
         WHERE post_id = $1
+        ORDER BY id ASC
       `, postId)
     .catch(error => {
       console.error(error.message, "The argument is:::", postId);
@@ -56,11 +57,23 @@ const db = require("./db");
     .catch(error => console.log(error));
   };
 
+  const deleteById = (id) => {
+    return db.query(`
+      DELETE FROM comments
+      WHERE id=$1
+      `, id)
+    .catch(error => {
+      console.error(error.message, "The argument is:::", id);
+      throw error;
+    });
+  };
+
 
 module.exports = {
   add,
   getAllCommentsInfoByPostId,
   numberOfCommentsLeft,
   getById,
-  update
+  update,
+  deleteById
 };

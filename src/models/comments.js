@@ -20,11 +20,15 @@ const update = (id, comment) => {
   return db.update(id, comment);
 };
 
+const deleteById = (id) => {
+  return db.deleteById(id);
+};
 
 module.exports = {
   add,
   getAllCommentsInfoByPostId,
   numberOfCommentsLeft,
   getById,
-  update
+  update,
+  deleteById
 };

@@ -78,9 +78,10 @@ input {
   background-color: #fff;
 }
 
-.delete-button {
+.delete-button, .delete-comment-button {
   border: none;
   background: none;
+  padding: 0;
 }
 
 button.comments-button {
@@ -122,4 +123,12 @@ button.comments-button {
 
 .comment-paragraph {
   display: inline;
+}
+
+.delete-comment {
+  display: inline;
+}
+
+.fa {
+  color: #606060;
 }
