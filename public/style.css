@@ -107,10 +107,14 @@ button.comments-button {
   display: block;
 }
 
-.edit-comment {
+.edit-comment-input {
   display: none;
 }
 
-.show-edit-comments {
+.show-edit-comment {
   display: block;
+}
+
+.hide-comment-paragraph {
+  display: none;
 }

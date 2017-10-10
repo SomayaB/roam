@@ -27,12 +27,12 @@ commentsButton.addEventListener('click', () => {
   comments.classList.toggle('open-panel');
 });
 
-//drop down edit comments NOT WORKING
-// const editCommentButtons = document.querySelector(".edit-comment-button");
-// const editComments = document.querySelector(".edit-comments");
-// console.log(editCommentButtons);
-// editCommentButtons.forEach(button => {
-//   button.addEventListener('click', () => {
-//     editComments.classList.toggle('show-edit-comments');
-//   });
-// });
+//edit comments
+const editCommentButtons = document.querySelectorAll(".edit-comment-button");
+
+editCommentButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    button.parentNode.parentNode.querySelector('.edit-comment-input').classList.toggle('show-edit-comment');
+    button.parentNode.parentNode.querySelector('.comment-paragraph').querySelector('.comment-paragraph-content').classList.toggle('hide-comment-paragraph');
+  });
+});
