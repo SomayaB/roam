@@ -32,23 +32,32 @@ router.post('/', (request, response) => {
     const content = request.body.content;
     const userId = request.session.user.id;
     const city = (request.body.city).toLowerCase();
-    Cities.findByName(city)
-    .then(city => {
-      const postInfo = {
-        title,
-        content,
-        userId,
-        cityId: city.id
-      };
-      Posts.create(postInfo)
-      .then(post => {
-        response.redirect(`/posts/${post[0].id}`);
+    const previousPage = request.headers.referer;
+    if (title.length === 0 && content.length === 0) {
+      response.render('form-validation-error', {previousPage, warning: 'You must enter a title and the content of your post cannot be empty.'});
+    } else if (content.length === 0) {
+      response.render('form-validation-error', {previousPage, warning: 'The content of your post cannot be empty.'});
+    } else if (title.length === 0) {
+      response.render('form-validation-error', {previousPage, warning: 'You must enter a title.'});
+    } else {
+      Cities.findByName(city)
+      .then(city => {
+        const postInfo = {
+          title,
+          content,
+          userId,
+          cityId: city.id
+        };
+        Posts.create(postInfo)
+        .then(post => {
+          response.redirect(`/posts/${post[0].id}`);
+        });
+      })
+      .catch(error => {
+        console.error(error.message);
+        throw error;
       });
-    })
-    .catch(error => {
-      console.error(error.message);
-      throw error;
-    });
+    }
 });
 
 router.post('/:id/comments', (request, response) => {
