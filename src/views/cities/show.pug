@@ -9,7 +9,8 @@ block content
       li
         h3 
           a(href=`/posts/${post.id}`) #{post.title}
-        h5 by #{post.name}
+        h5 by #{post.name} 
+          span.relative-date #{date}
         
         p #{post.content}
         

@@ -46,7 +46,7 @@ const getNameFromUser = (userId) => {
 
 const getAllPostInfoByCityId = (cityId) => {
   return db.any(`
-    SELECT posts.id, posts.title, posts.content, cities.name, users.name, cities.image_url FROM posts
+    SELECT posts.id, posts.title, posts.content, posts.date_posted, cities.name, users.name, cities.image_url FROM posts
     JOIN cities
     ON posts.city_id = cities.id
     JOIN users

@@ -26,3 +26,13 @@ VALUES
   ('Chutes Montmorency', 'Taller than Niagara Falls. Go try the zip line!', 2, 2),
   ('Buckingham Palace', 'Go visit in August when the queen is traveling. Beautiful gardens.', 2, 3)
 ;
+
+INSERT INTO comments
+  (comment, post_id, user_id)
+VALUES
+  ('I wanna go!', 4, 1),
+  ('Rented a pedal boat, it was great!', 1, 2),
+  ('Fancy!', 3, 1),
+  ('Kayaks are also great.', 1, 1),
+  ('Wow!', 3, 2)
+;

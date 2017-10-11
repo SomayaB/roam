@@ -7,7 +7,7 @@ const { isAuthorized } = require('../middlewares');
 router.put('/:postId/comments/:commentId', (request, response) => {
   const id = request.params.commentId;
   const newComment = request.body.comment;
-  const postId = request.params.postId
+  const postId = request.params.postId;
   Comments.getById(id)
   .then(comment => {
     if(request.session.user.id !== comment.user_id) {

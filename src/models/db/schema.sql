@@ -21,7 +21,8 @@ CREATE TABLE posts(
   title VARCHAR(200) NOT NULL,
   content TEXT NOT NULL,
   user_id INTEGER REFERENCES users (id),
-  city_id INTEGER REFERENCES cities (id)
+  city_id INTEGER REFERENCES cities (id),
+  date_posted DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
 DROP TABLE IF EXISTS comments;
