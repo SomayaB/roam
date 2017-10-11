@@ -79,7 +79,7 @@ router.put('/:id', isAuthorized, (request, response) => {
   .then(post => {
     if (request.session.user.id !== post.user_id) {
       response.status(403);
-      response.render('not-authorized', {warning: 'You can only edit your own posts.'});
+      response.render('not-authorized', {id, warning: 'You can only edit your own posts.'});
     } else {
     Posts.update(id, title, content)
     .then(() => {
@@ -100,7 +100,7 @@ router.delete('/:id', isAuthorized, (request, response) => {
   .then(post => {
     if (request.session.user.id !== post.user_id) {
       response.status(403);
-      response.render('not-authorized', {warning: 'You can only delete your own posts.'});
+      response.render('not-authorized', {id, warning: 'You can only delete your own posts.'});
     } else {
       Posts.deleteById(id)
       .then(() => {

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { createSession } = require('../utils');
-const { comparePasswords } = require('../../utils')
+const { comparePasswords } = require('../../utils');
 const Users = require('../../models/users');
 
 router.get('/signup', (request, response) => {

@@ -21,7 +21,6 @@ router.get('/:city', (request, response) => {
     Posts.getAllPostInfoByCityId(city.id)
     .then(posts => {
       const date = relativeDate(posts[0].date_posted);
-      console.log('date:::', date);
       response.render('cities/show', { city, posts, date });
     })
   .catch(error => {

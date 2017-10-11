@@ -32,7 +32,7 @@ block content
       p
         a(href=`/posts/${post.id}`) #{post.title}
         
-  if  numberOfComments == 1
+  if numberOfCommentsLeft == 1
     p #{numberOfCommentsLeft} comment
   else
     p #{numberOfCommentsLeft} comments       
