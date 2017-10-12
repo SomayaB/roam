@@ -1,6 +1,7 @@
 
 img {
-  max-height: 250px;
+  max-height: 200px;
+  margin-top: 20;
 }
 
 .form-errors {
@@ -135,4 +136,18 @@ button.comments-button {
 
 .relative-date {
   color: #707070;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.right-column {
+  flex-grow: 1;
+}
+
+.left-column {
+  flex-grow: 1;
+  margin-left: 10;
 }

@@ -1,55 +1,63 @@
 extends /partials/layout
 
 block content
-  
-  div.left-column
-    img(src="/blank-profile-picture.png")
-    if user.name
-      p #{user.name}
-    else
-      p Name:
-      
-    if user.date_joined
-      p Member since #{humanReadableDate}
-    else
-      p Date Joined:
-      
-    if user.current_city
-      i.fa.fa-home(aria-hidden='true')  
-      | 
-      |
-      span Lives in #{user.current_city}
-    else
-      p Current City:
-    
-    br
-    br    
-    div  
-      button.edit-profile-button(type="button") Edit Profile
-      
-  div.right-column
-    each post in posts
-      p
-        a(href=`/posts/${post.id}`) #{post.title}
+  div.profile
+    div.left-column
+      img(src="/blank-profile-picture.png")
+      if user.name
+        h4 #{user.name}
+      else
+        p Name:
         
-  if numberOfCommentsLeft == 1
-    p #{numberOfCommentsLeft} comment
-  else
-    p #{numberOfCommentsLeft} comments       
-  
-  div.edit-profile-modal
-    div.edit-profile-modal-content
-      span.close-modal &times;
-      form(action=`/users/${user.id}?_method=PUT`, method="POST")
-        div Name:
-          if user.name === null        
-            input(type="text" name="name")
-          else
-            input(type="text" name="name" value=`${user.name}`)    
-        div Current City:
-          if user.current_city === null
-            input(type="text" name="currentCity")
-          else 
-            input(type="text" name="currentCity" value=`${user.current_city}`)  
-        input(type="submit", value="Submit")
-            
+      if user.date_joined
+        p Member since #{humanReadableDate}
+      else
+        p Date Joined:
+        
+      if user.current_city
+        i.fa.fa-home(aria-hidden='true')  
+        | 
+        |
+        span Lives in #{user.current_city}
+      else
+        p Current City:
+      
+      br
+      br    
+      div  
+        button.edit-profile-button(type="button") Edit Profile
+        
+        
+    div.right-column
+      h4 Contributions:
+      -// console.log('posts::::::', posts);
+        - for (let city in posts) {
+          p #{city}
+          - console.log('values::::', posts[city][0]);
+          // - for ( let post in city)
+        - }
+        //- - console.log('posts[post] in view:::', posts[post])
+        //- - a(href=`/posts/${post.id}`) #{posts[post]}
+        
+        
+      if numberOfCommentsLeft == 1
+        p #{numberOfCommentsLeft} comment
+      else
+        p #{numberOfCommentsLeft} comments       
+    
+    div.edit-profile-modal
+      div.edit-profile-modal-content
+        span.close-modal &times;
+        form(action=`/users/${user.id}?_method=PUT`, method="POST")
+          div Name:
+            if user.name === null        
+              input(type="text" name="name")
+            else
+              input(type="text" name="name" value=`${user.name}`)    
+          div Current City:
+            if user.current_city === null
+              input(type="text" name="currentCity")
+            else 
+              input(type="text" name="currentCity" value=`${user.current_city}`)  
+          input(type="submit", value="Submit")
+              

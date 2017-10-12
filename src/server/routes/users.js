@@ -10,9 +10,13 @@ router.get('/:id', (request, response) => {
     Comments.numberOfCommentsLeft(user.id)
     .then(result => {
       const numberOfCommentsLeft = result.count;
-      console.log('numberOfCommentsLeft:::', numberOfCommentsLeft);
-      Posts.getByUserId(user.id)
+      Posts.getPostInfoByUserId(user.id)
       .then(posts => {
+        // console.log('posts::::::', posts);
+        // for (let post in posts) {
+        //   console.log('key:::', post);
+        //   console.log('values::::', posts[post][0]);
+        // }
         const humanReadableDate = user.date_joined.toDateString();
         response.render('users/show', {user, posts, numberOfCommentsLeft, humanReadableDate});
       });
