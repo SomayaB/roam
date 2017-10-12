@@ -38,12 +38,10 @@ const getPostInfoByUserId = (userId) => {
       return posts.reduce((cities, post) => {
         if ( post.city_name in cities) {
           let city = post.city_name;
-          delete post.city_name;
           cities[city].push(post);
         } else {
           cities[post.city_name] = [];
           let city = post.city_name;
-          delete post.city_name;
           cities[city].push(post);
         }
         return cities;

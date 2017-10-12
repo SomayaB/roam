@@ -29,16 +29,16 @@ block content
         
         
     div.right-column
-      h4 Contributions:
-      -// console.log('posts::::::', posts);
-        - for (let city in posts) {
-          p #{city}
-          - console.log('values::::', posts[city][0]);
-          // - for ( let post in city)
-        - }
-        //- - console.log('posts[post] in view:::', posts[post])
-        //- - a(href=`/posts/${post.id}`) #{posts[post]}
-        
+      h3 Contributions:
+      - for (let city in posts) {
+        h4 #{city} 
+          span(class='posts-length') (#{posts[city].length})
+        - posts[city].forEach(post => {
+          a(href=`/posts/${post.id}`) #{post.title}
+          br
+          br
+        -})
+      - }
         
       if numberOfCommentsLeft == 1
         p #{numberOfCommentsLeft} comment
