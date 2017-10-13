@@ -105,6 +105,7 @@ router.put('/:id', isAuthorized, (request, response) => {
 
 router.delete('/:id', isAuthorized, (request, response) => {
   const id = request.params.id;
+
   Posts.getById(id)
   .then(post => {
     if (request.session.user.id !== post.user_id) {

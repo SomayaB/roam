@@ -20,8 +20,12 @@ router.get('/:city', (request, response) => {
   .then(city => {
     Posts.getAllPostInfoByCityId(city.id)
     .then(posts => {
+      if(posts.length === 0) {
+        response.render('cities/show', {city, posts});
+      } else {
       const date = relativeDate(posts[0].date_posted);
       response.render('cities/show', { city, posts, date });
+      }
     })
   .catch(error => {
     console.error(error.message);
