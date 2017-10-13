@@ -6,7 +6,9 @@ block content
       img(src="/blank-profile-picture.png")
       br
       br
-      input(type='hidden', role='uploadcare-uploader', name='content', data-public-key='928969ce997a2e612c0c', data-images-only='')
+      input.uploadcare-file(type='hidden', role='uploadcare-uploader', name='my_file', data-crop='true')
+      div
+        img.profile-pic(src='', alt='')
 
       if user.name
         h4 #{user.name}
