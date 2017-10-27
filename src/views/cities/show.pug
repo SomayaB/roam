@@ -10,6 +10,6 @@ block content
           h3
             a(href=`/posts/${post.id}`) #{post.title}
           h5 by #{post.name}
-            span.relative-date #{date}
+            span.relative-date  #{relativeDate(post.date_posted)}
           p #{post.content}
         
