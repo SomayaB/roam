@@ -5,7 +5,8 @@ CREATE TABLE users(
   password VARCHAR(255) NOT NULL,
   name VARCHAR(255),
   date_joined DATE NOT NULL DEFAULT CURRENT_DATE,
-  current_city VARCHAR(255)
+  current_city VARCHAR(255),
+  image_url VARCHAR(255) DEFAULT '/blank-profile-picture.png'
 );
 
 DROP TABLE IF EXISTS cities;

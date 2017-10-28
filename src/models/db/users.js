@@ -56,14 +56,26 @@ const update = (name, currentCity, id) => {
   .catch(error => {
     console.error(error.message);
     throw error;
-  });  
+  });
 };
 
+const updatePicture = (id, newProfilePicture) => {
+  return db.query(`
+    UPDATE users
+    SET image_url = $2
+    WHERE id = $1
+    `, [id, newProfilePicture])
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
 
 
 module.exports = {
   findById,
   create,
   findByEmail,
-  update
+  update,
+  updatePicture
 };

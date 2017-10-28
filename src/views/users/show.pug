@@ -1,9 +1,9 @@
 extends /partials/layout
 
 block content
-  div.profile
+  div(class='profile', id=`${user.id}`)
     div.left-column
-      img(src="/blank-profile-picture.png")
+      img(src=`${user.image_url}`)
       br
       br
       input.uploadcare-file(type='hidden', role='uploadcare-uploader', name='my_file', data-crop='true')

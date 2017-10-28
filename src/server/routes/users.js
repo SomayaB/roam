@@ -37,5 +37,22 @@ router.put('/:id', (request, response) => {
   });
 });
 
+router.put('/:id/newProfilePicture', (request, response) => {
+  const id = request.params.id;
+  const newProfilePicture = request.body.image;
+  console.log('newProfilePicture::', newProfilePicture);
+  console.log('request.body:::', request.body);
+
+  Users.updatePicture(id, newProfilePicture)
+  .then(user => {
+    console.log('user:::', user);
+    response.json({image: user.image_url});
+  })
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+});
+
 
 module.exports = router;
