@@ -27,27 +27,27 @@
   var widget = uploadcare.Widget('[role=uploadcare-uploader]');
 
   widget.onUploadComplete(function (fileInfo) {
-    profilePic.src = fileInfo.cdnUrl;
-    console.log('fileInfo.cdnUrl', fileInfo.cdnUrl);
     const id = document.querySelector('.profile').id;
-    // {image: fileInfo.cdnUrl}
 
-    var myHeaders = new Headers();
+    var myHeaders = new Headers({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
     var myInit = {
       method: 'PUT',
       headers: myHeaders,
+      body: JSON.stringify({image: fileInfo.cdnUrl}),
       credentials: 'same-origin',
       cache: 'default',
-      body: {test: 'what?'}
     };
 
     fetch(`/users/${id}/newProfilePicture`, myInit)
     .then(response => {
-      console.log('response:::', response);
       return response.json();
     })
     .then(result => {
-      console.log('result:::', result.image);
+      document.querySelector('.uploadcare--widget__text').style.display = 'none';
+      profilePic.src = result.image;
     })
     .catch(error => {
       console.log(error);

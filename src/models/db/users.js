@@ -60,10 +60,11 @@ const update = (name, currentCity, id) => {
 };
 
 const updatePicture = (id, newProfilePicture) => {
-  return db.query(`
+  return db.oneOrNone(`
     UPDATE users
     SET image_url = $2
     WHERE id = $1
+    RETURNING *
     `, [id, newProfilePicture])
   .catch(error => {
     console.error(error.message);

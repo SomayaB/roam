@@ -3,12 +3,13 @@ extends /partials/layout
 block content
   div(class='profile', id=`${user.id}`)
     div.left-column
-      img(src=`${user.image_url}`)
+      img.profile-pic(src=`${user.image_url}`, alt='')
       br
       br
+        
       input.uploadcare-file(type='hidden', role='uploadcare-uploader', name='my_file', data-crop='true')
-      div
-        img.profile-pic(src='', alt='')
+      //- div
+      //-   img.profile-pic(src=`${user.image_url}`, alt='')
 
       if user.name
         h4 #{user.name}
