@@ -151,3 +151,32 @@ button.comments-button {
   flex-grow: 1;
   margin-left: 10;
 }
+
+.uploadcare--widget__file-name {
+  all: initial;
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: .4em 1em;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  border-radius: 6px;
+  border: none;
+  background: #157cfc;
+  color: #fff;
+  cursor: default;
+  text-align: center;
+  white-space: nowrap;
+  font: inherit;
+  line-height: inherit;
+  box-shadow: none;
+  text-shadow: inherit;
+  transition: background .3s;
+}
+
+.uploadcare--widget__file-name:hover {
+  background: #58a0f9;
+  color: #fff;
+}

@@ -5,11 +5,8 @@ block content
     div.left-column
       img.profile-pic(src=`${user.image_url}`, alt='')
       br
-      br
-        
+      br  
       input.uploadcare-file(type='hidden', role='uploadcare-uploader', name='my_file', data-crop='true')
-      //- div
-      //-   img.profile-pic(src=`${user.image_url}`, alt='')
 
       if user.name
         h4 #{user.name}

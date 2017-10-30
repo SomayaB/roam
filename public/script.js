@@ -19,10 +19,8 @@
     }
   });
 
+
   // upload profile picture with uploader widget
-
-  // var uploadcare = require('uploadcare-widget');
-
   var profilePic = document.querySelector('.profile-pic');
   var widget = uploadcare.Widget('[role=uploadcare-uploader]');
 
@@ -46,8 +44,9 @@
       return response.json();
     })
     .then(result => {
-      document.querySelector('.uploadcare--widget__text').style.display = 'none';
+      document.querySelector('.uploadcare--widget__file-size').style.display = 'none';
       profilePic.src = result.image;
+      document.querySelector('.uploadcare--widget__file-name').textContent = 'Choose a file';
     })
     .catch(error => {
       console.log(error);
