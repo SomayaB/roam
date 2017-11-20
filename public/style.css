@@ -1,3 +1,7 @@
+.content {
+  margin-left: 20px;
+  margin-top: 20px;
+}
 
 img {
   max-height: 200px;
@@ -149,7 +153,7 @@ button.comments-button {
 
 .left-column {
   flex-grow: 1;
-  margin-left: 10;
+  /*margin-left: 10;*/
 }
 
 .uploadcare--widget__file-name {
@@ -179,4 +183,12 @@ button.comments-button {
 .uploadcare--widget__file-name:hover {
   background: #58a0f9;
   color: #fff;
+}
+
+option {
+  background-color: pink; !important
+}
+
+.new-post {
+  align-content: center;
 }

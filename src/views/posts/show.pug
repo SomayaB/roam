@@ -2,28 +2,34 @@ extends /partials/layout
 
 block content
     div.post
-      div.icons
-        i.fa.fa-pencil-square-o.fa-2x(aria-hidden='true').edit-profile-button
-        div.edit-profile-modal
-          div.edit-profile-modal-content
-            span.close-modal &times;
+      div.edit-delete-buttons
+        //- // Modal Trigger
+        //- button.btn.modal-trigger(data-target='modal1') Modal
+        button.btn-floating.modal-trigger.blue.btn-large(data-target='modal1')
+          i.large.material-icons mode_edit
+        //- // Modal Structure
+        #modal1.modal.modal-fixed-footer
+          .modal-content
+            //- span.close-modal &times;
             form(action=`/posts/${post.id}?_method=PUT`, method="POST")
               div Title:
-                if post.title === null        
-                  input(type="text" name="title")
-                else
-                  input(type="text" name="title" value=`${post.title}`)    
-              div You review:
-                if post.content === null
-                  textarea(type="text" name="content")
-                else 
-                  textarea(type="text" name="content") #{post.content}  
-              input(type="submit", value="Submit")
-                
-        div
-          form(action=`/posts/${post.id}?_method=DELETE`, method="POST", onsubmit=`return confirm('Are you sure you want to delete "${post.title}"?')`)   
-            button.delete-button
-              i.fa.fa-trash.fa-3x(aria-hidden='true')
+              if post.title === null        
+                input(type="text" name="title")
+              else
+                input(type="text" name="title" value=`${post.title}`)    
+                div You review:
+              if post.content === null
+                textarea(type="text" name="content")
+              else 
+                textarea(type="text" name="content") #{post.content} 
+                br
+                br 
+                input(type="submit", value="Submit")
+        br
+        br            
+        form(action=`/posts/${post.id}?_method=DELETE`, method="POST", onsubmit=`return confirm('Are you sure you want to delete "${post.title}"?')`)   
+          button.btn-floating.red.btn-large
+            i.large.material-icons delete 
 
       h1 #{post.title}
       h3 by #{user.name}

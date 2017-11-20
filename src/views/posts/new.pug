@@ -1,13 +1,13 @@
 extends /partials/layout
 
 block content
-  form.flex-full(action=`/posts/`, method="post")
+  form.new-post.flex-full(action=`/posts/`, method="post")
     div City:
-    select(name="city")
-      option(value='Oakland') Oakland
-      option(value='Quebec') Quebec
-      option(value='London') London
-      option(value='Gibraltar') Gibraltar
+      select(name="city")
+        option(value='Oakland') Oakland
+        option(value='Quebec') Quebec
+        option(value='London') London
+        option(value='Gibraltar') Gibraltar
     div Title:
       input.title-input(type="text", name="title", maxlength='120', placeholder="Summarize your visit or highlight an interesting detail.") 
     div Your review:  

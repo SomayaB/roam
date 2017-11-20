@@ -84,11 +84,12 @@ router.put('/:id', isAuthorized, (request, response) => {
   const id = request.params.id;
   const title = request.body.title;
   const content = request.body.content;
+  const previousPage = request.headers.referer;
   Posts.getById(id)
   .then(post => {
     if (request.session.user.id !== post.user_id) {
       response.status(403);
-      response.render('not-authorized', {id, warning: 'You can only edit your own posts.'});
+      response.render('not-authorized', {previousPage, id, warning: 'You can only edit your own posts.'});
     } else {
     Posts.update(id, title, content)
     .then(() => {
@@ -105,12 +106,12 @@ router.put('/:id', isAuthorized, (request, response) => {
 
 router.delete('/:id', isAuthorized, (request, response) => {
   const id = request.params.id;
-
+  const previousPage = request.headers.referer;
   Posts.getById(id)
   .then(post => {
     if (request.session.user.id !== post.user_id) {
       response.status(403);
-      response.render('not-authorized', {id, warning: 'You can only delete your own posts.'});
+      response.render('not-authorized', {previousPage, id, warning: 'You can only delete your own posts.'});
     } else {
       Posts.deleteById(id)
       .then(() => {
