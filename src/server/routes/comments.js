@@ -13,7 +13,8 @@ router.put('/:postId/comments/:commentId', isAuthorized, (request, response) => 
   .then(comment => {
     if(request.session.user.id !== comment.user_id) {
       response.status(403);
-      response.render('not-authorized', {postId, previousPage, warning: 'You can only edit your own comments.'});
+      request.flash('error', 'You can only edit your own comments.');
+      response.redirect(`${previousPage}`);
     } else {
       Comments.update(id, newComment)
       .then(() => {
@@ -39,7 +40,8 @@ router.delete('/:postId/comments/:commentId', isAuthorized, (request, response) 
   .then(comment => {
     if(request.session.user.id !== comment.user_id) {
       response.status(403);
-      response.render('not-authorized', {id, previousPage, warning: 'You can only delete your own comments.'});
+      request.flash('error', 'You can only delete your own comments.');
+      response.redirect(`${previousPage}`);
     } else {
       Comments.deleteById(commentId)
       .then(() => {

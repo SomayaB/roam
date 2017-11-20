@@ -9,7 +9,7 @@ router.get('/signup', (request, response) => {
     response.redirect(`/users/${id}`);
   }
   else {
-    response.render('auth/signup');
+    response.render('auth/signup', {warning: request.flash('error')});
   }
 });
 
@@ -34,13 +34,14 @@ router.get('/login', (request, response) => {
     const id = request.session.user.id;
     response.redirect(`/users/${id}`);
   }
-    response.render('auth/login');
+    response.render('auth/login', {warning: request.flash('error')});
   }
 );
 
 router.post('/login', (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
+  const previousPage = request.headers.referer;
   Users.findByEmail(email)
   .then(user => {
     comparePasswords(password, user.password)
@@ -54,12 +55,14 @@ router.post('/login', (request, response) => {
           }
         });
       } else {
-        response.render('auth/login', {warning: 'Incorrect username or password'});
+        request.flash('error', 'Incorrect username or password');
+        response.redirect(`${previousPage}`);
       }
     });
   })
   .catch(error => {
-    response.render('auth/login', {warning: 'Incorrect username or password'});
+    request.flash('error', 'Incorrect username or password');
+    response.redirect(`${previousPage}`);
   });
 });
 

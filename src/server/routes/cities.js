@@ -23,7 +23,7 @@ router.get('/:city', (request, response) => {
       if(posts.length === 0) {
         response.render('cities/show', {city, posts});
       } else {
-      response.render('cities/show', { city, posts, relativeDate });
+      response.render('cities/show', { city, posts, relativeDate, warning: request.flash('error')});
       }
     })
   .catch(error => {
