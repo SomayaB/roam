@@ -9,8 +9,7 @@ router.get('/', (request, response) => {
     response.render('cities/index', {cities, warning: request.flash('error')});
   })
   .catch(error => {
-    console.error(error.message);
-    throw error;
+    response.status(500).render('error', {error});
   });
 });
 
@@ -18,7 +17,7 @@ router.get('/:city', (request, response) => {
   const city = request.params.city;
   Cities.findByName(city)
   .then(city => {
-    Posts.getAllPostInfoByCityId(city.id)
+    return Posts.getAllPostInfoByCityId(city.id)
     .then(posts => {
       if(posts.length === 0) {
         response.render('cities/show', {city, posts});
@@ -26,10 +25,9 @@ router.get('/:city', (request, response) => {
       response.render('cities/show', { city, posts, relativeDate, warning: request.flash('error')});
       }
     })
-  .catch(error => {
-    console.error(error.message);
-    throw error;
-  });
+    .catch(error => {
+      response.status(500).render('error', {error});
+    });
   });
 });
 

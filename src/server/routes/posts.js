@@ -13,16 +13,15 @@ router.get('/:id', (request, response) => {
   const id = request.params.id;
   Posts.getById(id)
   .then(post => {
-    Users.findById(post.user_id)
+    return Users.findById(post.user_id)
     .then(user => {
-      Comments.getAllCommentsInfoByPostId(post.id)
+      return Comments.getAllCommentsInfoByPostId(post.id)
       .then(comments => {
         response.render('posts/show', {user, post, comments, warning: request.flash('error')});
       });
     })
     .catch(error => {
-      console.error(error.message);
-      throw error;
+      response.status(500).render('error', {error});
     });
   });
 });
@@ -57,8 +56,7 @@ router.post('/', (request, response) => {
         });
       })
       .catch(error => {
-        console.error('error:::', error.stack);
-        response.send('failed');
+        response.status(500).render('error', {error});
       });
     }
 });
@@ -77,8 +75,7 @@ router.post('/:id/comments', (request, response) => {
     response.redirect(`/posts/${postId}`);
   })
   .catch(error => {
-    console.error(error.message);
-    throw error;
+    response.status(500).render('error', {error});
   });
 });
 
@@ -95,15 +92,14 @@ router.put('/:id', isAuthorized, (request, response) => {
       request.flash('error', 'You can only edit your own posts.');
       response.redirect(`${previousPage}`);
     } else {
-    Posts.update(id, title, content)
+    return Posts.update(id, title, content)
     .then(() => {
       response.redirect(`/posts/${id}`);
     });
     }
   })
   .catch(error => {
-    console.error(error.message);
-    throw error;
+    response.status(500).render('error', {error});
   });
 });
 
@@ -118,19 +114,15 @@ router.delete('/:id', isAuthorized, (request, response) => {
       request.flash('error', 'You can only delete your own posts.');
       response.redirect(`${previousPage}`);
     } else {
-      Posts.deleteById(id)
+      return Posts.deleteById(id)
       .then(() => {
         const userId = request.session.user.id;
         response.redirect(`/users/${userId}`);
-      })
-      .catch(error => {
-        console.log(error);
       });
     }
   })
   .catch(error => {
-    console.error(error.message);
-    throw error;
+    response.status(500).render('error', {error});
   });
 });
 

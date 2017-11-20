@@ -51,7 +51,7 @@ router.post('/login', (request, response) => {
         request.session.save(error => {
           response.redirect(`/users/${user.id}`);
           if(error) {
-            console.error(error);
+            response.status(500).render('error', {error});
           }
         });
       } else {
@@ -70,7 +70,7 @@ router.get('/logout', (request, response) => {
   request.session.destroy((error) => {
     response.redirect('/login');
     if(error) {
-      console.error(error);
+      response.status(500).render('error', {error});
     }
   });
 });
