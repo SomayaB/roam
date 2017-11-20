@@ -3,7 +3,6 @@ extends /partials/layout
 block content
   h1 Signup
     form(method="post", action="signup" )
-      pre.form-errors #{warning}
       label
         span email:
         input(type="email", name="email", maxlength="20" required)

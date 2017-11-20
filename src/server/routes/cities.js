@@ -6,7 +6,7 @@ const relativeDate = require('relative-date');
 router.get('/', (request, response) => {
   Cities.getAll()
   .then(cities => {
-    response.render('cities/index', {cities});
+    response.render('cities/index', {cities, warning: request.flash('error')});
   })
   .catch(error => {
     console.error(error.message);

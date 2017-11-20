@@ -8,6 +8,7 @@ html
   body
     include header.pug
     div.content
+      h3.form-errors #{warning}
       block content
       script.
         UPLOADCARE_PUBLIC_KEY = "928969ce997a2e612c0c";

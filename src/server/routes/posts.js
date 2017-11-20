@@ -6,7 +6,7 @@ const Comments = require('../../models/comments');
 const { isAuthorized } = require('../middlewares');
 
 router.get('/new', isAuthorized, (request, response) => {
-  response.render('posts/new');
+  response.render('posts/new', {warning: request.flash('error')});
 });
 
 router.get('/:id', (request, response) => {
@@ -17,7 +17,7 @@ router.get('/:id', (request, response) => {
     .then(user => {
       Comments.getAllCommentsInfoByPostId(post.id)
       .then(comments => {
-        response.render('posts/show', {user, post, comments});
+        response.render('posts/show', {user, post, comments, warning: request.flash('error')});
       });
     })
     .catch(error => {
@@ -34,11 +34,14 @@ router.post('/', (request, response) => {
     const city = (request.body.city).toLowerCase();
     const previousPage = request.headers.referer;
     if (title.length === 0 && content.length === 0) {
-      response.render('form-validation-error', {previousPage, warning: 'You must enter a title and the content of your post cannot be empty.'});
+      request.flash('error', 'You must enter a title and the content of your post cannot be empty.');
+      response.redirect(`${previousPage}`);
     } else if (content.length === 0) {
-      response.render('form-validation-error', {previousPage, warning: 'The content of your post cannot be empty.'});
+      request.flash('error', 'The content of your post cannot be empty.');
+      response.redirect(`${previousPage}`);
     } else if (title.length === 0) {
-      response.render('form-validation-error', {previousPage, warning: 'You must enter a title.'});
+      request.flash('error', 'You must enter a title.');
+      response.redirect(`${previousPage}`);
     } else {
       Cities.findByName(city)
       .then(city => {
@@ -48,14 +51,14 @@ router.post('/', (request, response) => {
           userId,
           cityId: city.id
         };
-        Posts.create(postInfo)
+        return Posts.create(postInfo)
         .then(post => {
           response.redirect(`/posts/${post[0].id}`);
         });
       })
       .catch(error => {
-        console.error(error.message);
-        throw error;
+        console.error('error:::', error.stack);
+        response.send('failed');
       });
     }
 });
@@ -89,7 +92,8 @@ router.put('/:id', isAuthorized, (request, response) => {
   .then(post => {
     if (request.session.user.id !== post.user_id) {
       response.status(403);
-      response.render('not-authorized', {previousPage, id, warning: 'You can only edit your own posts.'});
+      request.flash('error', 'You can only edit your own posts.');
+      response.redirect(`${previousPage}`);
     } else {
     Posts.update(id, title, content)
     .then(() => {
@@ -111,7 +115,8 @@ router.delete('/:id', isAuthorized, (request, response) => {
   .then(post => {
     if (request.session.user.id !== post.user_id) {
       response.status(403);
-      response.render('not-authorized', {previousPage, id, warning: 'You can only delete your own posts.'});
+      request.flash('error', 'You can only delete your own posts.');
+      response.redirect(`${previousPage}`);
     } else {
       Posts.deleteById(id)
       .then(() => {
