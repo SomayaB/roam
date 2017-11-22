@@ -46,7 +46,7 @@ const getNameFromUser = (userId) => {
 
 const getAllPostInfoByCityId = (cityId) => {
   return db.any(`
-    SELECT posts.id, posts.title, posts.content, cities.name, users.name, cities.image_url FROM posts
+    SELECT posts.id, posts.title, posts.content, posts.date_posted, cities.name, users.name, cities.image_url FROM posts
     JOIN cities
     ON posts.city_id = cities.id
     JOIN users
@@ -59,6 +59,24 @@ const getAllPostInfoByCityId = (cityId) => {
       throw error;
     });
 };
+
+const getPostInfoByUserId = (userId) => {
+  return db.any(`
+    SELECT posts.id, posts.title, posts.content, posts.date_posted, cities.name AS city_name, users.name FROM posts
+      JOIN users
+       ON posts.user_id = users.id
+      JOIN cities
+      ON posts.city_id = cities.id
+      WHERE user_id = $1
+      ORDER BY posts.id DESC
+    `, userId)
+    .catch(error => {
+      console.error(error.message, "The argument is:::", userId);
+      throw error;
+    });
+};
+
+
 
 const getPostByTitle = (title) => {
   // const titleWithoutSpaces = `%${title.toLowerCase().replace(/\s+/,'%')}%`;
@@ -103,5 +121,6 @@ module.exports = {
   getPostByTitle,
   create,
   update,
-  deleteById
+  deleteById,
+  getPostInfoByUserId
 };

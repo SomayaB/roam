@@ -1,15 +1,18 @@
 extends /partials/layout
 
 block content
-  
   h1 #{city.name}
-  img(src=`${city.image_url}`)
-  ul
-    each post in posts
-      li
-        h3 
-          a(href=`/posts/${post.id}`) #{post.title}
-        h5 by #{post.name}
-        
-        p #{post.content}
-        
+  img.city-image(src=`${city.image_url}`)
+  if posts.length
+    ul
+      each post in posts
+        li
+          h3
+            a(href=`/posts/${post.id}`) #{post.title}
+          h5 by #{post.name}
+            span.relative-date  #{relativeDate(post.date_posted)}
+          p #{post.content}
+  else
+    br
+    br
+    h5 There are no reviews about this city yet.

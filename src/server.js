@@ -8,6 +8,7 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 const config = require('./config/config.js').getConfig();
+const flash = require('connect-flash');
 
 app.use(morgan("dev"));
 
@@ -17,6 +18,8 @@ app.locals.basedir = path.join(__dirname, '/views');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(flash());
 app.use(methodOverride('_method'));
 
 

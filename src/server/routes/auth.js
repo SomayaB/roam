@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { createSession } = require('../utils');
-const { comparePasswords } = require('../../utils')
+const { createSession, renderError } = require('../utils');
+const { comparePasswords } = require('../../utils');
 const Users = require('../../models/users');
 
 router.get('/signup', (request, response) => {
@@ -9,7 +9,7 @@ router.get('/signup', (request, response) => {
     response.redirect(`/users/${id}`);
   }
   else {
-    response.render('auth/signup');
+    response.render('auth/signup', {warning: request.flash('error')});
   }
 });
 
@@ -25,7 +25,8 @@ router.post('/signup', (request, response) => {
      });
    })
    .catch(error => {
-     response.render('auth/signup', {warning: 'That username already exists. Please choose another.'});
+     request.flash('error', 'That username already exists. Please choose another.');
+     response.redirect('auth/signup');
    });
 });
 
@@ -34,13 +35,14 @@ router.get('/login', (request, response) => {
     const id = request.session.user.id;
     response.redirect(`/users/${id}`);
   }
-    response.render('auth/login');
+    response.render('auth/login', {warning: request.flash('error')});
   }
 );
 
 router.post('/login', (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
+  const previousPage = request.headers.referer;
   Users.findByEmail(email)
   .then(user => {
     comparePasswords(password, user.password)
@@ -50,16 +52,18 @@ router.post('/login', (request, response) => {
         request.session.save(error => {
           response.redirect(`/users/${user.id}`);
           if(error) {
-            console.error(error);
+            renderError(request, response, error);
           }
         });
       } else {
-        response.render('auth/login', {warning: 'Incorrect username or password'});
+        request.flash('error', 'Incorrect username or password');
+        response.redirect(`${previousPage}`);
       }
     });
   })
   .catch(error => {
-    response.render('auth/login', {warning: 'Incorrect username or password'});
+    request.flash('error', 'Incorrect username or password');
+    response.redirect(`${previousPage}`);
   });
 });
 
@@ -67,9 +71,11 @@ router.get('/logout', (request, response) => {
   request.session.destroy((error) => {
     response.redirect('/login');
     if(error) {
-      console.error(error);
+      renderError(request, response, error);
     }
   });
 });
+
+
 
 module.exports = router;

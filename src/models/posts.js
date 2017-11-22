@@ -32,6 +32,23 @@ const deleteById = (id) => {
   return db.deleteById(id);
 };
 
+const getPostInfoByUserId = (userId) => {
+  return db.getPostInfoByUserId(userId)
+    .then(posts => {
+      return posts.reduce((cities, post) => {
+        if ( post.city_name in cities) {
+          let city = post.city_name;
+          cities[city].push(post);
+        } else {
+          cities[post.city_name] = [];
+          let city = post.city_name;
+          cities[city].push(post);
+        }
+        return cities;
+      }, {});
+    });
+};
+
 module.exports = {
   getByUserId,
   getById,
@@ -40,5 +57,6 @@ module.exports = {
   getPostByTitle,
   create,
   update,
-  deleteById
+  deleteById,
+  getPostInfoByUserId
 };

@@ -1,9 +1,21 @@
 html
   head
     link(rel="stylesheet", href="/style.css")
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Roam
   body
     include header.pug
-
-    block content
-    script(src='https://use.fontawesome.com/f62333e5c9.js')  
-    script(src="/script.js")
+    div.content.main
+      h3.form-errors #{warning}
+      block content
+      script.
+        UPLOADCARE_PUBLIC_KEY = "928969ce997a2e612c0c";
+        UPLOADCARE_TABS = 'file'; 
+      script(charset='utf-8', src='//ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js')
+      script(type='text/javascript', src='https://code.jquery.com/jquery-3.2.1.min.js')    
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js')
+      script(src='https://use.fontawesome.com/f62333e5c9.js')
+      script(type='text/javascript', src="/script.js")
+    include footer.pug

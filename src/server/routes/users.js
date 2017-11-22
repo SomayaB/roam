@@ -2,16 +2,16 @@ const router = require('express').Router();
 const Users = require('../../models/users');
 const Posts = require('../../models/posts');
 const Comments = require('../../models/comments');
+const { renderError } = require('../utils');
 
 router.get('/:id', (request, response) => {
   const id = request.params.id;
   Users.findById(id)
   .then(user => {
-    Comments.numberOfCommentsLeft(user.id)
+    return Comments.numberOfCommentsLeft(user.id)
     .then(result => {
       const numberOfCommentsLeft = result.count;
-      console.log('numberOfCommentsLeft:::', numberOfCommentsLeft);
-      Posts.getByUserId(user.id)
+      return Posts.getPostInfoByUserId(user.id)
       .then(posts => {
         const humanReadableDate = user.date_joined.toDateString();
         response.render('users/show', {user, posts, numberOfCommentsLeft, humanReadableDate});
@@ -19,8 +19,7 @@ router.get('/:id', (request, response) => {
     });
   })
   .catch(error => {
-    console.error(error.message);
-    throw error;
+    renderError(request, response, error);
   });
 });
 
@@ -33,8 +32,20 @@ router.put('/:id', (request, response) => {
     response.redirect(`/users/${id}`);
   })
   .catch(error => {
-    console.error(error.message);
-    throw error;
+    renderError(request, response, error);
+  });
+});
+
+router.put('/:id/newProfilePicture', (request, response) => {
+  const id = request.params.id;
+  const newProfilePicture = request.body.image;
+
+  Users.updatePicture(id, newProfilePicture)
+  .then(user => {
+    response.json({image: user.image_url});
+  })
+  .catch(error => {
+    renderError(request, response, error);
   });
 });
 

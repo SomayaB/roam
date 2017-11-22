@@ -1,49 +1,51 @@
 const router = require('express').Router( { mergeParams: true } );
 const Comments = require('../../models/comments');
 const { isAuthorized } = require('../middlewares');
+const { renderError } = require('../utils');
 
 
-//Function might be ok but view not done
-router.put('/:postId/comments/:commentId', (request, response) => {
+router.put('/:postId/comments/:commentId', isAuthorized, (request, response) => {
   const id = request.params.commentId;
   const newComment = request.body.comment;
-  const postId = request.params.postId
+  const postId = request.params.postId;
+  const previousPage = request.headers.referer;
   Comments.getById(id)
   .then(comment => {
     if(request.session.user.id !== comment.user_id) {
       response.status(403);
-      response.render('not-authorized', {postId, warning: 'You can only edit your own comments.'});
+      request.flash('error', 'You can only edit your own comments.');
+      response.redirect(`${previousPage}`);
     } else {
-      Comments.update(id, newComment)
+      return Comments.update(id, newComment)
       .then(() => {
         response.redirect(`/posts/${postId}`);
       });
     }
   })
   .catch(error => {
-    console.error(error.message);
-    throw error;
+    renderError(request, response, error);
   });
 });
 
-router.delete('/:postId/comments/:commentId', (request, response) => {
-  const id = request.params.commentId;
-  const postId = request.params.postId;
-  Comments.getById(id)
+router.delete('/:postId/comments/:commentId', isAuthorized, (request, response) => {
+  const commentId = request.params.commentId;
+  const id = request.params.postId;
+  const previousPage = request.headers.referer;
+  Comments.getById(commentId)
   .then(comment => {
     if(request.session.user.id !== comment.user_id) {
       response.status(403);
-      response.render('not-authorized', {postId, warning: 'You can only edit your own comments.'});
+      request.flash('error', 'You can only delete your own comments.');
+      response.redirect(`${previousPage}`);
     } else {
-      Comments.deleteById(id)
+      return Comments.deleteById(commentId)
       .then(() => {
-        response.redirect(`/posts/${postId}`);
+        response.redirect(`/posts/${id}`);
       });
     }
   })
   .catch(error => {
-    console.error(error.message);
-    throw error;
+    renderError(request, response, error);
   });
 });
 

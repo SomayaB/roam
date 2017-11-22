@@ -7,7 +7,9 @@ const isLoggedIn = (request, response, next) => {
 
 const isAuthorized = (request, response, next) => {
   if(!request.session.user) {
-    response.redirect('/login');
+    const previousPage = request.headers.referer;
+    request.flash('error', 'You must be logged in to perform this action.');
+    response.redirect(`${previousPage}`);
   } else {
     next();
   }

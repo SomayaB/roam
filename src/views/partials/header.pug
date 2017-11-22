@@ -1,8 +1,53 @@
-nav.navbar
-  a(href="/") Roam
-  a(href="/cities") Cities
-  a(href="/posts/new") Write a Review
-  if isLoggedIn 
-    a(href="/logout") Logout
-  else 
-    a(href="/login") Login/Sign up
+ul#dropdown1.dropdown-content
+  li
+    a(href='/cities/oakland') Oakland
+    li.divider
+  li
+    a(href='/cities/london') London
+    li.divider
+  li
+    a(href='/cities/gibraltar') Gibraltar
+    li.divider
+  li
+    a(href='/cities/quebec') Québec
+ul#dropdown2.dropdown-content
+  li
+    a(href='/cities/oakland') Oakland
+    li.divider
+  li
+    a(href='/cities/london') London
+    li.divider
+  li
+    a(href='/cities/gibraltar') Gibraltar
+    li.divider
+  li
+    a(href='/cities/quebec') Québec
+nav
+  .nav-wrapper
+    a.brand-logo(href='/') Roam
+    a.button-collapse(href='#', data-activates='mobile-demo')
+      i.material-icons menu
+    ul.right.hide-on-med-and-down
+      li
+        a(href='/posts/new') Write a Review
+      li
+        if isLoggedIn 
+          a(href="/logout") Logout
+        else 
+          a(href="/login") Login/Sign up
+      li
+        a.dropdown-button(href='#!', data-activates='dropdown1')
+          | Cities
+          i.material-icons.right arrow_drop_down
+    ul#mobile-demo.side-nav
+      li
+        a(href='/posts/new') Write a Review
+      li
+        if isLoggedIn 
+          a(href="/logout") Logout
+        else 
+          a(href="/login") Login/Sign up
+      li
+        a.dropdown-button(href='#!', data-activates='dropdown2')
+          | Cities
+          i.material-icons.right arrow_drop_down

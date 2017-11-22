@@ -1,55 +1,80 @@
 extends /partials/layout
 
 block content
-  
-  div.left-column
-    img(src="/blank-profile-picture.png")
-    if user.name
-      p #{user.name}
-    else
-      p Name:
-      
-    if user.date_joined
-      p Member since #{humanReadableDate}
-    else
-      p Date Joined:
-      
-    if user.current_city
-      i.fa.fa-home(aria-hidden='true')  
-      | 
-      |
-      span Lives in #{user.current_city}
-    else
-      p Current City:
-    
-    br
-    br    
-    div  
-      button.edit-profile-button(type="button") Edit Profile
-      
-  div.right-column
-    each post in posts
-      p
-        a(href=`/posts/${post.id}`) #{post.title}
+  div(class='profile', id=`${user.id}`)
+    div.left-column
+      img.profile-pic(src=`${user.image_url}`, alt='')
+      br
+      br  
+      input.uploadcare-file(type='hidden', role='uploadcare-uploader', name='my_file', data-crop='true')
+
+      if user.name
+        h4 #{user.name}
+      else
+        p Name:
         
-  if  numberOfComments == 1
-    p #{numberOfCommentsLeft} comment
-  else
-    p #{numberOfCommentsLeft} comments       
-  
-  div.edit-profile-modal
-    div.edit-profile-modal-content
-      span.close-modal &times;
-      form(action=`/users/${user.id}?_method=PUT`, method="POST")
-        div Name:
-          if user.name === null        
-            input(type="text" name="name")
-          else
-            input(type="text" name="name" value=`${user.name}`)    
-        div Current City:
-          if user.current_city === null
-            input(type="text" name="currentCity")
-          else 
-            input(type="text" name="currentCity" value=`${user.current_city}`)  
-        input(type="submit", value="Submit")
-            
+      if user.date_joined
+        p Member since #{humanReadableDate}
+      else
+        p Date Joined:
+        
+      if user.current_city
+        i.fa.fa-home(aria-hidden='true')  
+        | 
+        |
+        span Lives in #{user.current_city}
+      else
+        p Current City:
+      
+      br
+      br    
+      div  
+        button.edit-profile-button.btn-floating.modal-trigger.blue.btn-large(data-target='modal1', type="button")
+          i.large.material-icons mode_edit
+        
+        
+    div.right-column
+      h3 Contributions:
+      - for (let city in posts) {
+        h4 #{city} 
+          span(class='posts-length') (#{posts[city].length})
+        - posts[city].forEach(post => {
+          a(href=`/posts/${post.id}`) #{post.title}
+          br
+          br
+        -})
+      - }
+        
+      if numberOfCommentsLeft == 1
+        p #{numberOfCommentsLeft} comment
+      else
+        p #{numberOfCommentsLeft} comments       
+    
+    div
+      #modal1.modal.modal-fixed-footer
+        .modal-content
+          form(action=`/users/${user.id}?_method=PUT`, method="POST")
+            div.input-field.current-name
+              if user.name === null       
+                i.material-icons.prefix account_circle
+                input#icon_prefix.validate(type="text", name="name")
+                label(for='icon_prefix') Name
+              else
+                i.material-icons.prefix account_circle  
+                input#icon_prefix.validate(type="text", name="name", value=`${user.name}`)
+                label(for='icon_prefix') Name 
+            div.input-field.current-city
+              if user.current_city === null
+                i.material-icons.prefix location_city
+                input#icon_prefix.validate(type="text", name="currentCity")
+                label(for='icon_prefix') City
+              else 
+                i.material-icons.prefix location_city
+                input#icon_prefix.validate(type="text" name="currentCity" value=`${user.current_city}`)  
+                label(for='icon_prefix') City
+            button.btn.waves-effect.waves-light(type='submit').modal-submit
+              | Submit
+              i.material-icons.right send 
+              
+              
+              

@@ -1,10 +1,38 @@
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
 
-img {
-  max-height: 250px;
+ .main {
+   flex: 1 0 auto;
+ }
+
+.content {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.brand-logo {
+  margin-left: 20px;
+}
+
+.city-image {
+  max-height: 300px;
+  margin-top: 20;
+}
+
+.profile-pic {
+  max-height: 300px;
+  margin-top: 20;
 }
 
 .form-errors {
   color: red;
+  font-size: 2rem;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 input {
@@ -131,4 +159,81 @@ button.comments-button {
 
 .fa {
   color: #606060;
+}
+
+.relative-date, .posts-length {
+  color: #707070;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.right-column {
+  flex-grow: 1;
+}
+
+.left-column {
+  flex-grow: 1;
+  /*margin-left: 10;*/
+}
+
+.uploadcare--widget__file-name {
+  all: initial;
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: .4em 1em;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  border-radius: 6px;
+  border: none;
+  background: #157cfc;
+  color: #fff;
+  cursor: default;
+  text-align: center;
+  white-space: nowrap;
+  font: inherit;
+  line-height: inherit;
+  box-shadow: none;
+  text-shadow: inherit;
+  transition: background .3s;
+}
+
+.uploadcare--widget__file-name:hover {
+  background: #58a0f9;
+  color: #fff;
+}
+
+option {
+  background-color: pink; !important
+}
+
+.new-post {
+  align-content: center;
+}
+
+.slider .indicators .indicator-item.active{
+    background-color: #26a69a !important;
+}
+
+.signup-login-button {
+  padding: 0 1rem;
+}
+
+.slider {
+  margin-top: 20px !important;
+}
+
+.caption{
+  padding-top: 20px;
+  z-index: 5;
+  text-shadow: 1px 1px #1b1b1b;
+}
+
+.modal-submit {
+  margin-top: 30px;
 }

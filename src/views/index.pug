@@ -2,10 +2,33 @@ extends /partials/layout
 
 block content
 
-  h1 Roam
-
   a(href="/login")
-    button(type="button") Login
+    button(type="button" class="waves-effect waves-light btn-large") Login
+  |     
   a(href="/signup")
-    button(type="button") Signup
+    button(type="button" class="waves-effect waves-light btn-large") Signup
     
+  .slider
+    ul.slides
+      li
+        img(src='/images/oakland.jpg')
+        .caption.center-align
+          h3 Oakland
+          h5.light.grey-text.text-lighten-3 From great food to World Championship Basketball, check out Oakland!
+      li
+        img(src='/images/quebec2.jpg')
+        .caption.right-align
+          h3 Québec City
+          h5.light.grey-text.text-lighten-3 The only fortified city north of Mexico!
+      li
+        img(src='/images/london2.jpg')
+        .caption.center-align
+          h3 London
+          h5.light.grey-text.text-lighten-3 So much history, you can't go wrong with London!
+      li
+        img(src='/images/gibraltar2.jpg')
+        .caption.right-align
+          h3 Gibraltar
+          h5.light.grey-text.text-lighten-3 Escape to this magnificent nature reserve!
+  
+      

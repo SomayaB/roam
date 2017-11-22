@@ -24,10 +24,15 @@ const updateProfile = function(name, currentCity, id) {
   return db.update(name, currentCity, id);
 };
 
+const updatePicture = (id, newProfilePicture) => {
+  return db.updatePicture(id, newProfilePicture);
+};
+
 module.exports = {
   findById,
   create,
   getPostsByUserId,
   findByEmail,
-  updateProfile
+  updateProfile,
+  updatePicture
 };
