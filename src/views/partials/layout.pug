@@ -4,10 +4,10 @@ html
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css')
     link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-
+    title Roam
   body
     include header.pug
-    div.content
+    div.content.main
       h3.form-errors #{warning}
       block content
       script.
@@ -18,3 +18,4 @@ html
       script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js')
       script(src='https://use.fontawesome.com/f62333e5c9.js')
       script(type='text/javascript', src="/script.js")
+    include footer.pug
