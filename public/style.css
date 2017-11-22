@@ -1,15 +1,38 @@
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ .main {
+   flex: 1 0 auto;
+ }
+
 .content {
   margin-left: 20px;
   margin-top: 20px;
+  margin-bottom: 40px;
 }
 
-img {
-  max-height: 200px;
+.brand-logo {
+  margin-left: 20px;
+}
+
+.city-image {
+  max-height: 300px;
+  margin-top: 20;
+}
+
+.profile-pic {
+  max-height: 300px;
   margin-top: 20;
 }
 
 .form-errors {
   color: red;
+  font-size: 2rem;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 input {
@@ -191,4 +214,26 @@ option {
 
 .new-post {
   align-content: center;
+}
+
+.slider .indicators .indicator-item.active{
+    background-color: #26a69a !important;
+}
+
+.signup-login-button {
+  padding: 0 1rem;
+}
+
+.slider {
+  margin-top: 20px !important;
+}
+
+.caption{
+  padding-top: 20px;
+  z-index: 5;
+  text-shadow: 1px 1px #1b1b1b;
+}
+
+.modal-submit {
+  margin-top: 30px;
 }
