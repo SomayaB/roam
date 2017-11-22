@@ -2,7 +2,7 @@ extends /partials/layout
 
 block content
   h1 #{city.name}
-  img(src=`${city.image_url}`)
+  img.city-image(src=`${city.image_url}`)
   if posts.length
     ul
       each post in posts
