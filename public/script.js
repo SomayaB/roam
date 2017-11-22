@@ -3,30 +3,9 @@
   //get elements
   const editProfileButton = document.querySelector(".edit-profile-button");
   const editProfileModal = document.querySelector(".edit-profile-modal");
+  const editProfileModalContent = document.querySelector(".edit-profile-modal-content");
   const closeModalButton = document.querySelector(".close-modal");
 
-  //add event listeners Modal
-  if (editProfileButton) {
-    editProfileButton.addEventListener('click', () => {
-      $('.edit-profile-modal').modal();
-      // now you can open modal from code
-      $('.edit-profile-modal').modal('open');
-
-      //or by click on trigger
-      // $('.trigger-modal').modal();
-
-      editProfileModal.style.display = "block";
-    });
-
-    closeModalButton.addEventListener('click', () => {
-      editProfileModal.style.display = "none";
-    });
-    editProfileModal.addEventListener('click', () => {
-      if(event.target === editProfileModal) {
-        editProfileModal.style.display = "none";
-      }
-    });
-  }
 
   //drop down comments
   const commentsButton = document.querySelector(".comments-button");
@@ -88,4 +67,8 @@ $('select').material_select();
 $(document).ready(function(){
   // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
   $('.modal').modal();
+
+  $('.slider').slider();
+  $(".button-collapse").sideNav();
+  // Materialize.updateTextFields();
 });
