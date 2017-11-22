@@ -29,7 +29,8 @@ block content
       br
       br    
       div  
-        button.edit-profile-button(type="button") Edit Profile
+        button.edit-profile-button.btn-floating.modal-trigger.blue.btn-large(data-target='modal1', type="button")
+          i.large.material-icons mode_edit
         
         
     div.right-column
@@ -49,19 +50,31 @@ block content
       else
         p #{numberOfCommentsLeft} comments       
     
-    div.edit-profile-modal
-      div.edit-profile-modal-content
-        span.close-modal &times;
-        form(action=`/users/${user.id}?_method=PUT`, method="POST")
-          div Name:
-            if user.name === null        
-              input(type="text" name="name")
-            else
-              input(type="text" name="name" value=`${user.name}`)    
-          div Current City:
-            if user.current_city === null
-              input(type="text" name="currentCity")
-            else 
-              input(type="text" name="currentCity" value=`${user.current_city}`)  
-          input(type="submit", value="Submit")
+    div
+      #modal1.modal.modal-fixed-footer
+        .modal-content
+          form(action=`/users/${user.id}?_method=PUT`, method="POST")
+            div.input-field.current-name
+              if user.name === null       
+                i.material-icons.prefix account_circle
+                input#icon_prefix.validate(type="text", name="name")
+                label(for='icon_prefix') Name
+              else
+                i.material-icons.prefix account_circle  
+                input#icon_prefix.validate(type="text", name="name", value=`${user.name}`)
+                label(for='icon_prefix') Name 
+            div.input-field.current-city
+              if user.current_city === null
+                i.material-icons.prefix location_city
+                input#icon_prefix.validate(type="text", name="currentCity")
+                label(for='icon_prefix') City
+              else 
+                i.material-icons.prefix location_city
+                input#icon_prefix.validate(type="text" name="currentCity" value=`${user.current_city}`)  
+                label(for='icon_prefix') City
+            button.btn.waves-effect.waves-light(type='submit').modal-submit
+              | Submit
+              i.material-icons.right send 
+              
+              
               
