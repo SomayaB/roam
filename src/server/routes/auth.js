@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createSession } = require('../utils');
+const { createSession, renderError } = require('../utils');
 const { comparePasswords } = require('../../utils');
 const Users = require('../../models/users');
 
@@ -25,7 +25,8 @@ router.post('/signup', (request, response) => {
      });
    })
    .catch(error => {
-     response.render('auth/signup', {warning: 'That username already exists. Please choose another.'});
+     request.flash('error', 'That username already exists. Please choose another.');
+     response.redirect('auth/signup');
    });
 });
 
@@ -51,7 +52,7 @@ router.post('/login', (request, response) => {
         request.session.save(error => {
           response.redirect(`/users/${user.id}`);
           if(error) {
-            response.status(500).render('error', {error});
+            renderError(request, response, error);
           }
         });
       } else {
@@ -70,7 +71,7 @@ router.get('/logout', (request, response) => {
   request.session.destroy((error) => {
     response.redirect('/login');
     if(error) {
-      response.status(500).render('error', {error});
+      renderError(request, response, error);
     }
   });
 });

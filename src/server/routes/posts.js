@@ -4,6 +4,7 @@ const Users = require('../../models/users');
 const Cities = require('../../models/cities');
 const Comments = require('../../models/comments');
 const { isAuthorized } = require('../middlewares');
+const { renderError } = require('../utils');
 
 router.get('/new', isAuthorized, (request, response) => {
   response.render('posts/new', {warning: request.flash('error')});
@@ -21,7 +22,7 @@ router.get('/:id', (request, response) => {
       });
     })
     .catch(error => {
-      response.status(500).render('error', {error});
+      renderError(request, response, error);
     });
   });
 });
@@ -56,7 +57,7 @@ router.post('/', (request, response) => {
         });
       })
       .catch(error => {
-        response.status(500).render('error', {error});
+        renderError(request, response, error);
       });
     }
 });
@@ -75,7 +76,7 @@ router.post('/:id/comments', (request, response) => {
     response.redirect(`/posts/${postId}`);
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 
@@ -99,7 +100,7 @@ router.put('/:id', isAuthorized, (request, response) => {
     }
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 
@@ -122,7 +123,7 @@ router.delete('/:id', isAuthorized, (request, response) => {
     }
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 

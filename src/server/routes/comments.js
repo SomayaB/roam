@@ -1,6 +1,7 @@
 const router = require('express').Router( { mergeParams: true } );
 const Comments = require('../../models/comments');
 const { isAuthorized } = require('../middlewares');
+const { renderError } = require('../utils');
 
 
 router.put('/:postId/comments/:commentId', isAuthorized, (request, response) => {
@@ -22,7 +23,7 @@ router.put('/:postId/comments/:commentId', isAuthorized, (request, response) => 
     }
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 
@@ -44,7 +45,7 @@ router.delete('/:postId/comments/:commentId', isAuthorized, (request, response) 
     }
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 

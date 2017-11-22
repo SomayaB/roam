@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Cities = require('../../models/cities');
 const Posts = require('../../models/posts');
 const relativeDate = require('relative-date');
+const { renderError } = require('../utils');
 
 router.get('/', (request, response) => {
   Cities.getAll()
@@ -9,7 +10,7 @@ router.get('/', (request, response) => {
     response.render('cities/index', {cities, warning: request.flash('error')});
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 
@@ -19,15 +20,16 @@ router.get('/:city', (request, response) => {
   .then(city => {
     return Posts.getAllPostInfoByCityId(city.id)
     .then(posts => {
+      console.log('here?');
       if(posts.length === 0) {
         response.render('cities/show', {city, posts});
       } else {
-      response.render('cities/show', { city, posts, relativeDate, warning: request.flash('error')});
+        response.render('cities/show', { city, posts, relativeDate, warning: request.flash('error')});
       }
-    })
-    .catch(error => {
-      response.status(500).render('error', {error});
     });
+  })
+  .catch(error => {
+    renderError(request, response, error);
   });
 });
 

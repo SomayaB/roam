@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Users = require('../../models/users');
 const Posts = require('../../models/posts');
 const Comments = require('../../models/comments');
+const { renderError } = require('../utils');
 
 router.get('/:id', (request, response) => {
   const id = request.params.id;
@@ -18,7 +19,7 @@ router.get('/:id', (request, response) => {
     });
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 
@@ -31,7 +32,7 @@ router.put('/:id', (request, response) => {
     response.redirect(`/users/${id}`);
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 
@@ -44,7 +45,7 @@ router.put('/:id/newProfilePicture', (request, response) => {
     response.json({image: user.image_url});
   })
   .catch(error => {
-    response.status(500).render('error', {error});
+    renderError(request, response, error);
   });
 });
 
