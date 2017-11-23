@@ -30,6 +30,7 @@ router.get('/:id', (request, response) => {
 router.post('/', (request, response) => {
     const title = request.body.title;
     const content = request.body.content;
+    const rating = request.body.rating;
     const userId = request.session.user.id;
     const city = (request.body.city).toLowerCase();
     const previousPage = request.headers.referer;
@@ -49,7 +50,8 @@ router.post('/', (request, response) => {
           title,
           content,
           userId,
-          cityId: city.id
+          cityId: city.id,
+          rating
         };
         return Posts.create(postInfo)
         .then(post => {
