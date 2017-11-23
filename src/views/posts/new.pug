@@ -1,17 +1,37 @@
 extends /partials/layout
 
 block content
-  form.new-post.flex-full(action=`/posts/`, method="post")
-    div City:
-      select(name="city")
-        option(value='Oakland') Oakland
-        option(value='Quebec') Quebec
-        option(value='London') London
-        option(value='Gibraltar') Gibraltar
-    div Title:
-      input.title-input(type="text", name="title", maxlength='120', placeholder="Summarize your visit or highlight an interesting detail.", required)
-    div Your review:  
-      textarea.post-textarea(type="text", name="content", placeholder="Tell people about your experience.", required)
-    div 
-      input(type="submit", placeholder="Submit")
+
     
+  .row
+    form.col.s12
+      .row
+        .input-field.col.s3
+          select(name="city")
+            option(value='', disabled='', selected='') Choose a city
+            option(value='Oakland') Oakland
+            option(value='Quebec') Quebec
+            option(value='London') London
+            option(value='Gibraltar') Gibraltar
+      .row
+        .input-field.col.s12
+          input#title.validate(type="text", name="title", maxlength='120', required)
+          label(name='title') Title
+      .row
+        .input-field.col.s12
+         textarea#textarea1.materialize-textarea(type="text", name="content", required)
+         label(for='textarea1') Your review
+      div 
+      .row
+        .input-field.col.s2
+          select(name="rating")
+            option(value='', disabled='', selected='') Rate your experience
+            option(value='5') ⭐️⭐️⭐️⭐️⭐️
+            option(value='4') ⭐️⭐️⭐️⭐️
+            option(value='3') ⭐️⭐️⭐️
+            option(value='2') ⭐️⭐️
+            option(value='1') ⭐️      
+      button.btn.waves-effect.waves-light(type='submit').modal-submit
+        | Submit
+        i.material-icons.right send 
+      
