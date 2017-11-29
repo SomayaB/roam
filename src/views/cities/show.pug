@@ -1,11 +1,11 @@
 extends /partials/layout
 
 block content
-  .parallax-container
-    .parallax
-      img(src=`${city.image_url}`)
-  .section.white
-    .row.container
+  .parallax.splash.img-fluid(style=`background-image:url(${city.image_url})`)
+    .parallax-caption
+      span.border #{city.name}
+  .container.content-out-parralax
+    .row
       if posts.length
         ul
           each post in posts

@@ -22,34 +22,35 @@ ul#dropdown2.dropdown-content
     li.divider
   li
     a(href='/cities/quebec') Québec
-nav
-  .nav-wrapper
-    a.brand-logo(href='/') 
-      i.material-icons.logo flight_takeoff 
-      | Roam
-    a.button-collapse(href='#', data-activates='mobile-demo')
-      i.material-icons menu
-    ul.right.hide-on-med-and-down
-      li
-        a.dropdown-button(href='#!', data-activates='dropdown1')
-          | Cities
-          i.material-icons.right arrow_drop_down
-      li
-        a(href='/posts/new') Write a Review
-      li
-        if isLoggedIn 
-          a(href="/logout") Logout
-        else 
-          a(href="/login") Login/Sign up
-    ul#mobile-demo.side-nav
-      li
-        a.dropdown-button(href='#!', data-activates='dropdown2')
-          | Cities
-          i.material-icons.right arrow_drop_down
-      li
-        a(href='/posts/new') Write a Review
-      li
-        if isLoggedIn 
-          a(href="/logout") Logout
-        else 
-          a(href="/login") Login/Sign up
+div.navbar-fixed
+  nav
+    .nav-wrapper
+      a.brand-logo(href='/')
+        i.material-icons.logo flight_takeoff
+        | Roam
+      a.button-collapse(href='#', data-activates='mobile-demo')
+        i.material-icons menu
+      ul.right.hide-on-med-and-down
+        li
+          a.dropdown-button(href='#!', data-activates='dropdown1')
+            | Cities
+            i.material-icons.right arrow_drop_down
+        li
+          a(href='/posts/new') Write a Review
+        li
+          if isLoggedIn
+            a(href="/logout") Logout
+          else
+            a(href="/login") Login/Sign up
+      ul#mobile-demo.side-nav
+        li
+          a.dropdown-button(href='#!', data-activates='dropdown2')
+            | Cities
+            i.material-icons.right arrow_drop_down
+        li
+          a(href='/posts/new') Write a Review
+        li
+          if isLoggedIn
+            a(href="/logout") Logout
+          else
+            a(href="/login") Login/Sign up

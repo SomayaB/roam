@@ -6,6 +6,7 @@ body {
 
  .main {
    flex: 1 0 auto;
+   margin-top: -10px
  }
 
 .content {
@@ -244,6 +245,10 @@ option {
   margin-top: -30px;
 }
 
+.container.content-out-parralax{
+  padding-top: 50px;
+}
+
 nav i.material-icons.logo {
   font-size: 35px;
   padding-left: 10px;
@@ -251,4 +256,59 @@ nav i.material-icons.logo {
 
 select {
   font-family: 'FontAwesome', 'sans-serif';
+}
+
+.devicon-github-plain-wordmark {
+  position: relative;
+  font-size: 45px;
+  padding-left: 10px;
+  padding-bottom: 50px;
+}
+
+.view-code {
+  padding-top: 28px;
+  margin-left: -84px;
+  position: absolute;
+}
+.copyright{
+  padding-top: 15px;
+  position: absolute;
+}
+
+.parallax {
+
+    /* Set a specific height */
+    min-height: 100vh;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    margin-left: -19%;
+    margin-right: -15%;
+    margin-top: -30px;
+    max-width: 100vw !important;
+}
+
+.parallax-caption {
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.parallax-caption span.border {
+  padding: 18px;
+  font-size: 4rem;
+}
+
+.border {
+  border: 0 !important;
 }
