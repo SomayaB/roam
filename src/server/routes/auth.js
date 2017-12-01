@@ -26,7 +26,7 @@ router.post('/signup', (request, response) => {
    })
    .catch(error => {
      request.flash('error', 'That username already exists. Please choose another.');
-     response.redirect('auth/signup');
+     response.redirect('/signup');
    });
 });
 
