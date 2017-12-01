@@ -19,7 +19,7 @@ block content
         p Date Joined:
         
       if user.current_city
-        i.fa.fa-home(aria-hidden='true')  
+        i.fa.fa-home.fa-2x(aria-hidden='true')
         | 
         |
         span Lives in #{user.current_city}
@@ -34,9 +34,10 @@ block content
         
         
     div.right-column
-      h3 Contributions:
+      h3 Reviews:
+      br
       - for (let city in posts) {
-        h4 #{city} 
+        h5 #{city}
           span(class='posts-length') (#{posts[city].length})
         - posts[city].forEach(post => {
           a(href=`/posts/${post.id}`) #{post.title}
@@ -44,11 +45,6 @@ block content
           br
         -})
       - }
-        
-      if numberOfCommentsLeft == 1
-        p #{numberOfCommentsLeft} comment
-      else
-        p #{numberOfCommentsLeft} comments       
     
     div
       #modal1.modal.modal-fixed-footer
