@@ -18,13 +18,19 @@ VALUES
 ;
 
 INSERT INTO posts
-  (title, content, user_id, city_id)
+  (title, content, user_id, city_id, rating)
 VALUES
-  ('Lake Merritt', 'Go rent some boats!', 1, 1),
-  ('Swans Market', 'Great food. Something for everyone. **Dog friendly!', 1, 1),
-  ('Château Frontenac', 'Most photographed hotel in the world. Go spend the night!', 2, 2),
-  ('Chutes Montmorency', 'Taller than Niagara Falls. Go try the zip line!', 2, 2),
-  ('Buckingham Palace', 'Go visit in August when the queen is traveling. Beautiful gardens.', 2, 3)
+  ('Lake Merritt', 'This is a lovely little lake smack dab in the middle of Oakland. There is so much to do here. You can take kayak classes or rowing. It is nice to jog or walk around. There are even gondola rides. Go rent some boats!', 1, 1, 4),
+  ('Swans Market', 'Great place to people watch and eat good food. Lots of places to eat. Close to main streets in downtown Oakland. **Dog friendly!', 1, 1, 4),
+  ('Château Frontenac', 'This Grand Dame hotel was built by the Canadian Pacific Railway in 1893; they truly don’t build them like this any more. There is a reason why it is the most photographed hotel in the world! The old world elegance and charm is matched with all the mod cons (wifi, rainfall shower head etc) and service you expect from a Fairmont property. We were in a deluxe room overlooking the river, breathtaking! We can’t imagine staying anywhere when visiting beautiful Quebec City!', 2, 2, 5),
+  ('Chutes Montmorency', 'Breathtaking and beautiful.
+This waterfall happens to be taller than Niagara Falls.
+They have created an excellent walkway which allows you to get close to the falls and to take it in from various vantage points.
+Being off-season, parking was free...otherwise, I believe it is $9-$12 dollars.
+Also, there is a zip line that goes ACROSS the falls!! So cool!
+Driving past the falls at night, they are lit and beautiful to see from a distance.
+Well worth the visit!', 2, 2, 5),
+  ('Buckingham Palace', 'The State Rooms are only open in August when the Queen is in Scotland. They were a true wonder to visit. The tours are timed tickets, purchase well in advance of your trip, they run very smoothly and they do not over sell tickets making the entire tour very enjoyable because you have plenty of room to move around and see everything you would like. No photography in the Palace means you do not have to worry about others stopping in front of you, the audio guide is very well done and easy to use. A must see when you are in London!', 2, 3, 4)
 ;
 
 INSERT INTO comments

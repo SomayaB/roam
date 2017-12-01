@@ -12,21 +12,21 @@ block content
           .modal-content
             //- span.close-modal &times;
             form(action=`/posts/${post.id}?_method=PUT`, method="POST")
-              div Title:
-              if post.title === null        
-                input(type="text" name="title")
-              else
-                input(type="text" name="title" value=`${post.title}`)    
-                div You review:
-              if post.content === null
-                textarea(type="text" name="content")
-              else 
-                textarea(type="text" name="content") #{post.content} 
-                br
-                br 
+              div
+                .row
+                  .input-field.col.s12
+                    input#title.validate(type="text", name="title", value=`${post.title}`, maxlength='120', required)
+                    label(name='title') Title
+              div
+                .row
+                  .input-field.col.s12
+                   textarea#textarea1.materialize-textarea(type="text", name="content") #{post.content}
+                   label(for='textarea1') Your review  
+              div 
                 button.btn.waves-effect.waves-light(type='submit')
                   | Submit
-                  i.material-icons.right send            
+                  i.material-icons.right send  
+                                     
         br
         br            
         form(action=`/posts/${post.id}?_method=DELETE`, method="POST", onsubmit=`return confirm('Are you sure you want to delete "${post.title}"?')`)   
@@ -35,7 +35,16 @@ block content
 
       h1 #{post.title}
       h3 by #{user.name}
-      
+      if post.rating === 5
+        h5 ⭐️⭐️⭐️⭐️⭐️
+      if post.rating === 4
+        h5 ⭐️⭐️⭐️⭐️
+      if post.rating === 3
+        h5 ⭐️⭐️⭐️ 
+      if post.rating === 2
+        h5 ⭐️⭐️
+      if post.rating === 1
+        h5 ⭐️    
       p #{post.content}
       
     div.commentsDiv

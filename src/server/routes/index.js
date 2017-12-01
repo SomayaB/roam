@@ -26,9 +26,4 @@ router.use('/posts', posts);
 router.use('/posts', comments);
 
 
-
-
-
-
-
 module.exports = router;

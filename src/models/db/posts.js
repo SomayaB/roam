@@ -1,10 +1,10 @@
 const db = require("./db");
 
 const create = (postInfo) => {
-  return db.any(`INSERT INTO posts (title, content, user_id, city_id)
-    VALUES($1, $2, $3, $4)
+  return db.any(`INSERT INTO posts (title, content, user_id, city_id, rating)
+    VALUES($1, $2, $3, $4, $5)
     RETURNING *
-    `, [postInfo.title, postInfo.content, postInfo.userId, postInfo.cityId])
+    `, [postInfo.title, postInfo.content, postInfo.userId, postInfo.cityId, postInfo.rating])
   .catch(error => {
     console.error(error.message, "The argument is:::", postInfo);
     throw error;
@@ -46,7 +46,7 @@ const getNameFromUser = (userId) => {
 
 const getAllPostInfoByCityId = (cityId) => {
   return db.any(`
-    SELECT posts.id, posts.title, posts.content, posts.date_posted, cities.name, users.name, cities.image_url FROM posts
+    SELECT posts.id, posts.title, posts.content, posts.date_posted, posts.rating, cities.name, users.name, cities.image_url FROM posts
     JOIN cities
     ON posts.city_id = cities.id
     JOIN users
@@ -62,7 +62,7 @@ const getAllPostInfoByCityId = (cityId) => {
 
 const getPostInfoByUserId = (userId) => {
   return db.any(`
-    SELECT posts.id, posts.title, posts.content, posts.date_posted, cities.name AS city_name, users.name FROM posts
+    SELECT posts.id, posts.title, posts.content, posts.date_posted, posts.rating, cities.name AS city_name, users.name FROM posts
       JOIN users
        ON posts.user_id = users.id
       JOIN cities
@@ -76,8 +76,6 @@ const getPostInfoByUserId = (userId) => {
     });
 };
 
-
-
 const getPostByTitle = (title) => {
   // const titleWithoutSpaces = `%${title.toLowerCase().replace(/\s+/,'%')}%`;
   return db.oneOrNone(`
@@ -90,12 +88,12 @@ const getPostByTitle = (title) => {
     });
 };
 
-const update = (id, title, content) => {
+const update = (id, title, content, rating) => {
   return db.query(`
     UPDATE posts
-    SET title=$2, content=$3
+    SET title=$2, content=$3, rating=$4
     WHERE id=$1
-    `, [id, title, content])
+    `, [id, title, content, rating])
   .catch(error => {
     console.error(error.message);
     throw error;

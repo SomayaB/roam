@@ -20,7 +20,6 @@ router.get('/:city', (request, response) => {
   .then(city => {
     return Posts.getAllPostInfoByCityId(city.id)
     .then(posts => {
-      console.log('here?');
       if(posts.length === 0) {
         response.render('cities/show', {city, posts});
       } else {

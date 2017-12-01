@@ -69,7 +69,7 @@ router.post('/login', (request, response) => {
 
 router.get('/logout', (request, response) => {
   request.session.destroy((error) => {
-    response.redirect('/login');
+    response.redirect('/');
     if(error) {
       renderError(request, response, error);
     }

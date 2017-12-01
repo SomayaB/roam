@@ -24,7 +24,7 @@ const create = (postInfo) => {
   return db.create(postInfo);
 };
 
-const update = (id, title, content) => {
+const update = (id, title, content, rating) => {
   return db.update(id, title, content);
 };
 

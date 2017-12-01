@@ -6,7 +6,7 @@ CREATE TABLE users(
   name VARCHAR(255),
   date_joined DATE NOT NULL DEFAULT CURRENT_DATE,
   current_city VARCHAR(255),
-  image_url VARCHAR(255) DEFAULT '/blank-profile-picture.png'
+  image_url VARCHAR(255) DEFAULT '/images/blank-profile-picture.png'
 );
 
 DROP TABLE IF EXISTS cities;
@@ -23,7 +23,8 @@ CREATE TABLE posts(
   content TEXT NOT NULL,
   user_id INTEGER REFERENCES users (id) ON DELETE CASCADE,
   city_id INTEGER REFERENCES cities (id) ON DELETE CASCADE,
-  date_posted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  date_posted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  rating INTEGER
 );
 
 DROP TABLE IF EXISTS comments;
