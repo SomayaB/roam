@@ -25,7 +25,7 @@ app.use(methodOverride('_method'));
 
 app.use(session({
   store: new pgSession({
-    conString: `postgres://${config.getIn(["db", "host"])}:${config.getIn(["db", "port"])}/${config.getIn(["db", "name"])}`
+    conString: `postgres://${config.getIn(["db", "user"])}:${config.getIn(["db", "password"])}:${config.getIn(["db", "host"])}:${config.getIn(["db", "port"])}/${config.getIn(["db", "name"])}`
   }),
   secret: config.get("server").get("secret"),
   resave: false,
