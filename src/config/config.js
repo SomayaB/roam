@@ -15,7 +15,8 @@ module.exports = (() => {
       db: Immutable.Map({
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
-        name: process.env.DB_NAME
+        name: process.env.DB_NAME,
+        user: process.env.DB_USER
       }),
       server: Immutable.Map({
         port: process.env.PORT,
