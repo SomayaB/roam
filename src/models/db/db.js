@@ -5,7 +5,9 @@ const config = require("../../config/config").getConfig();
 const connectionObject = {
   host: config.get("db").get("host"),
   port: config.get("db").get("port"),
-  database: config.get("db").get("name")
+  database: config.get("db").get("name"),
+  user: config.get("db").get("user"),
+  password: config.get("db").get("password")
 };
  //write a function to check to see if my connection object is valid- if host, for example, is undefined, it still works and does not throw an error below
 
