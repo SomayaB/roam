@@ -6,6 +6,8 @@ A travel site providing traveler reviews of restaurants, hotels and fun activiti
 - Implemented authentication and session and used a Postgres database to store the session data.
 - Enforced MVC principles.
 
+![alt text](public/roam_screenshot.png)
+
 [Link to Live Site](https://roamin.herokuapp.com/)
 
 ## Setting up Development Environment
