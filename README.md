@@ -2,6 +2,10 @@
 
 A travel site providing traveler reviews of restaurants, hotels and fun activities!
 
+- Robust RESTful API that runs on an Express server.
+- Implemented authentication and session and used a Postgres database to store the session data.
+- Enforced MVC principles.
+
 [Link to Live Site](https://roamin.herokuapp.com/)
 
 ## Setting up Development Environment
